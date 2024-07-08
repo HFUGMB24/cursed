@@ -64,7 +64,14 @@ let currentScene;
 let inventory;
 let health;
 let healthMax;
+function startScene() {
+    chooseScene();
+}
 function chooseScene() {
+    let currentScene = "start";
+    let inventory = new Inventory;
+    let health = 3;
+    let healthMax = 3;
     const scene = dialogueData[currentScene];
     const textContainer = document.getElementById("desc");
     const choicesContainer = document.getElementById("choices");
@@ -84,3 +91,4 @@ function chooseScene() {
 }
 function handleChoice(choice) {
 }
+startScene();

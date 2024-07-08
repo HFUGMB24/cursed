@@ -1,0 +1,64 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.gradient-overlay {
+    height: 5%;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(244, 244, 244, 0), rgba(221, 221, 221, 1));
+}
+
+.choices {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+}
+
+.choice {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.choice:hover {
+    border: 2px solid #fff;
+}
+
+.choice:focus {
+    outline: none;
+}
+
+.choice:active {
+    transform: translateY(1px);
+}
+
+#health-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
