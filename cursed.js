@@ -60,3 +60,4 @@ class Inventory {
         return this.items.some(item => item.name === name);
     }
 }
+function chooseScene() { }
