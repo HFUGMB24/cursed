@@ -60,4 +60,27 @@ class Inventory {
         return this.items.some(item => item.name === name);
     }
 }
-function chooseScene() { }
+let currentScene;
+let inventory;
+let health;
+let healthMax;
+function chooseScene() {
+    const scene = dialogueData[currentScene];
+    const textContainer = document.getElementById("desc");
+    const choicesContainer = document.getElementById("choices");
+    if (textContainer) {
+        textContainer.innerHTML = `<p>${scene.text}</p>`;
+    }
+    if (choicesContainer) {
+        choicesContainer.innerHTML = "";
+        scene.choices.forEach(choice => {
+            const button = document.createElement("button");
+            button.className = "choice";
+            button.innerText = choice.text;
+            button.addEventListener("click", () => handleChoice(choice));
+            choicesContainer.appendChild(button);
+        });
+    }
+}
+function handleChoice(choice) {
+}
