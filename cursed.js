@@ -3,8 +3,15 @@ const dialogueData = {
     start: {
         text: "You are in a dark forest. You see a path ahead.",
         choices: [
-            { text: "Take the path", next: "path", addItem: "map" },
-            { text: "Stay here", next: "stay" }
+            {
+                text: "Take the path",
+                next: "path",
+                addItem: "map"
+            },
+            {
+                text: "Stay here",
+                next: "stay"
+            }
         ]
     },
     path: {
