@@ -85,43 +85,64 @@ class Inventory {
     }
 }
 
-let currentScene: string;
-let inventory: Inventory;
-let health: number;
-let healthMax: number
-
-function startScene(){
-    chooseScene();
-}
-
-function chooseScene() {
+function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
     let health = 3;
     let healthMax = 3;
 
-    const scene = dialogueData[currentScene];
-    const textContainer = document.getElementById("desc");
-    const choicesContainer = document.getElementById("choices");
+    function chooseScene() {
+        const scene = dialogueData[currentScene];
+        const textContainer = document.getElementById("desc");
+        const choicesContainer = document.getElementById("choices");
 
-    if (textContainer) {
-        textContainer.innerHTML = `<p>${scene.text}</p>`;
+        if (textContainer) {
+            textContainer.innerHTML = `<p>${scene.text}</p>`;
+        }
+
+        if (choicesContainer) {
+            choicesContainer.innerHTML = "";
+            scene.choices.forEach(choice => {
+                const button = document.createElement("button");
+                button.className = "choice";
+                button.innerText = choice.text;
+                button.addEventListener("click", () => handleChoice(choice));
+                choicesContainer.appendChild(button);
+            });
+        }
     }
 
-    if (choicesContainer) {
-        choicesContainer.innerHTML = "";
-        scene.choices.forEach(choice => {
-            const button = document.createElement("button");
-            button.className = "choice";
-            button.innerText = choice.text;
-            button.addEventListener("click", () => handleChoice(choice));
-            choicesContainer.appendChild(button);
-        });
+    function handleChoice(choice: Choice) {
+        if (choice.addItem) {
+            inventory.addItem(choice.addItem);
+        }
+        if (choice.removeItem) {
+            inventory.removeItem(choice.removeItem);
+        }
+
+        if (choice.addHealth) {
+            health = Math.min(health + choice.addHealth, healthMax);
+        }
+        if (choice.removeHealth) {
+            health = Math.max(health - choice.removeHealth, 0);
+        }
+
+        if (choice.reload) {
+            location.reload();
+            return;
+        }
+
+        const scene = dialogueData[currentScene];
+        scene.choices = scene.choices.filter(c => c !== choice);
+
+        if (choice.requiredItem && inventory.hasItem(choice.requiredItem)) {
+            currentScene = choice.alternateNext!;
+        } else {
+            currentScene = choice.next;
+        }
+
+        chooseScene();
     }
+    chooseScene();
 }
-
-function handleChoice(choice: Choice){
-
-}
-
 startScene();
