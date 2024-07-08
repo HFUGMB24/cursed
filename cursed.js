@@ -42,3 +42,21 @@ const dialogueData = {
         ]
     }
 };
+class Inventory {
+    constructor() {
+        this.items = [];
+    }
+    addItem(name) {
+        this.items.push({
+            name,
+            type: "",
+            amount: 0
+        });
+    }
+    removeItem(name) {
+        this.items = this.items.filter(item => item.name !== name);
+    }
+    hasItem(name) {
+        return this.items.some(item => item.name === name);
+    }
+}

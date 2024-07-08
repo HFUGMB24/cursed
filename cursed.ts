@@ -56,3 +56,34 @@ const dialogueData: { [key: string]: Scene } = {
         ]
     }
 };
+
+interface Item
+{
+    name: string;
+    type: string;
+    amount: number;
+}
+
+class Inventory
+{
+    private items: Item[] = [];
+
+    addItem(name: string): void
+    {
+        this.items.push({
+            name,
+            type: "",
+            amount: 0
+        });
+    }
+
+    removeItem(name: string): void
+    {
+        this.items = this.items.filter(item => item.name !== name);
+    }
+
+    hasItem(name: string): boolean
+    {
+        return this.items.some(item => item.name === name);
+    }
+}
