@@ -145,3 +145,9 @@ body {
     display: inline;
     height: 1em;
 }
+
+.health {
+    height: fit-content;
+    display: inline;
+    height: 1em;
+}
