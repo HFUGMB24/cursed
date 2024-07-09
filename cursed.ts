@@ -181,7 +181,7 @@ function createCharacter()
 }
 
 
-// Scene Engine
+// Scene Manager
 function startScene()
 {
     let currentScene = "start";

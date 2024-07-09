@@ -100,7 +100,7 @@ function createCharacter() {
         });
     }
 }
-// Scene Engine
+// Scene Manager
 function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
