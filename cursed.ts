@@ -160,6 +160,7 @@ button3.addEventListener('click', function handleClick(_event) {
     chosenCharacter.push(Character3);
     const element = <HTMLElement>document.getElementById("Character");
     element.remove(); 
+});
   
 // Inventory
 interface Status
