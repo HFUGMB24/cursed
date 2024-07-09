@@ -1,9 +1,12 @@
-interface Scene {
+// Scene Interface
+interface Scene
+{
     text: string;
     choices: Choice[];
 }
 
-interface Choice {
+interface Choice
+{
     text: string;
     next: string;
     addItem?: string;
@@ -15,17 +18,20 @@ interface Choice {
     removeHealth?: number;
 }
 
-const dialogueData: { [key: string]: Scene } = {
+// Scene Data
+const sceneData: { [key: string]: Scene; } = {
     start: {
         text: "You are in a dark forest. You see a path ahead.",
         choices: [
-            { 
-                text: "Take the path", 
+            {
+                text: "Take the path",
                 next: "path",
-                addItem: "map" },
-            { 
+                addItem: "map"
+            },
+            {
                 text: "Stay here",
-                next: "stay" }
+                next: "stay"
+            }
         ]
     },
     path: {
@@ -57,11 +63,10 @@ const dialogueData: { [key: string]: Scene } = {
     }
 };
 
+// Inventory
 interface Item
 {
     name: string;
-    type: string;
-    amount: number;
 }
 
 class Inventory
@@ -72,9 +77,13 @@ class Inventory
     {
         this.items.push({
             name,
-            type: "",
-            amount: 0
         });
+        const itemUI = document.createElement("div");
+        const rightPanel = document.getElementById("right-panel")!;
+        itemUI.className = "item";
+        itemUI.innerText = Inventory.name;
+        rightPanel.appendChild(itemUI);
+
     }
 
     removeItem(name: string): void
@@ -150,5 +159,179 @@ button3.addEventListener('click', function handleClick(_event) {
     console.log("three");
     chosenCharacter.push(Character3);
     const element = <HTMLElement>document.getElementById("Character");
-    element.remove();
+    element.remove(); 
+  
+// Inventory
+interface Status
+{
+    name: string;
+}
+
+// class Status
+// {
+//     private status: Status[] = [];
+
+//     addStatus(name: string): void
+//     {
+//         this.status.push({
+//             name,
+//         });
+
+//         const statusUI = document.createElement("div");
+//         const leftPanel = document.getElementById("left-panel")!;
+//         statusUI.className = "status";
+//         statusUI.innerText = Status.name;
+//         leftPanel.appendChild(statusUI);
+
+//     }
+
+//     removeStatus(name: string): void
+//     {
+//         this.status = this.status.filter(status => status.name !== name);
+//     }
+
+//     hasStatus(name: string): boolean
+//     {
+//         return this.status.some(status => status.name === name);
+//     }
+// }
+
+// Character Information
+interface CharacterStats
+{
+    name: string;
+    class: string;
+    health: number;
+    str: number;
+    dex: number;
+    wis: number;
+}
+
+let char: CharacterStats[] = [];
+
+function createCharacter()
+{
+    if (1 == 1) // Character 1
+    {
+        char.push({
+            name: "",
+            class: "",
+            health: 2,
+            str: 2,
+            dex: 2,
+            wis: 2,
+        });
+    } if (1 == 1) // Character 2
+    {
+        char.push({
+            name: "",
+            class: "",
+            health: 2,
+            str: 2,
+            dex: 2,
+            wis: 2,
+        });
+    } if (1 == 1) // Character 3
+    {
+        char.push({
+            name: "",
+            class: "",
+            health: 2,
+            str: 2,
+            dex: 2,
+            wis: 2,
+        });
+    }
+}
+
+
+// Scene Manager
+function startScene()
+{
+    let currentScene = "start";
+    let inventory = new Inventory;
+    let health = 3;
+    let healthMax = 3;
+
+    function chooseScene()
+    {
+        const scene = sceneData[currentScene];
+        const textContainer = document.getElementById("desc");
+        const choicesContainer = document.getElementById("choices");
+
+        if (textContainer)
+        {
+            textContainer.innerHTML = `<p>${scene.text}</p>`;
+        }
+
+        if (choicesContainer)
+        {
+            choicesContainer.innerHTML = "";
+            scene.choices.forEach(choice =>
+            {
+                const button = document.createElement("button");
+                button.className = "choice";
+                button.innerText = choice.text;
+                button.addEventListener("click", () => handleChoice(choice));
+                choicesContainer.appendChild(button);
+            });
+        }
+    }
+
+    function handleChoice(choice: Choice)
+    {
+        if (choice.addItem)
+        {
+            inventory.addItem(choice.addItem);
+        }
+        if (choice.removeItem)
+        {
+            inventory.removeItem(choice.removeItem);
+        }
+
+        if (choice.addHealth)
+        {
+            health = Math.min(health + choice.addHealth, healthMax);
+        }
+        if (choice.removeHealth)
+        {
+            health = Math.max(health - choice.removeHealth, 0);
+        }
+        updateHealth();
+
+        if (choice.reload)
+        {
+            location.reload();
+            return;
+        }
+
+        const scene = sceneData[currentScene];
+        scene.choices = scene.choices.filter(c => c !== choice);
+
+        if (choice.requiredItem && inventory.hasItem(choice.requiredItem))
+        {
+            currentScene = choice.alternateNext!;
+        } else
+        {
+            currentScene = choice.next;
+        }
+
+        chooseScene();
+    }
+
+    function updateHealth()
+    {
+        const healthUI = document.getElementById("health-ui");
+        if (healthUI)
+        {
+            healthUI.innerHTML = `Health: ${health}/${healthMax}`;
+        }
+    }
+    chooseScene();
+}
+
+// Start on Load
+document.addEventListener("DOMContentLoaded", () =>
+{
+    startScene();
 });
