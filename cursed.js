@@ -18,7 +18,7 @@ const sceneData = {
     path: {
         text: "You walk down the path and find a map.",
         choices: [
-            { text: "Look at the map", next: "map" },
+            { text: "Look at the map", next: "map", addItem: "health potion", addStatus: "poisoned" },
             { text: "Keep walking", next: "deep_forest", addHealth: 1 }
         ]
     },
@@ -51,17 +51,63 @@ class Inventory {
         this.items.push({
             name,
         });
-        const itemUI = document.createElement("div");
-        const rightPanel = document.getElementById("right-panel");
-        itemUI.className = "item";
-        itemUI.innerText = Inventory.name;
-        rightPanel.appendChild(itemUI);
+        this.updateItems();
     }
     removeItem(name) {
         this.items = this.items.filter(item => item.name !== name);
+        this.updateItems();
     }
     hasItem(name) {
         return this.items.some(item => item.name === name);
+    }
+    updateItems() {
+        var elements = document.getElementsByClassName("item");
+        while (elements.length > 0) {
+            if (elements[0].parentNode != null) {
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+        }
+        for (let i = 0; i < this.items.length; i++) {
+            const itemUI = document.createElement("div");
+            const rightPanel = document.getElementById("inventory");
+            itemUI.className = "item";
+            itemUI.innerText = this.items[i].name;
+            rightPanel.appendChild(itemUI);
+            console.log(this.items[i]);
+        }
+    }
+}
+class Status {
+    constructor() {
+        this.status = [];
+    }
+    addStatus(name) {
+        this.status.push({
+            name,
+        });
+        this.updateStatus();
+    }
+    removeStatus(name) {
+        this.status = this.status.filter(status => status.name !== name);
+    }
+    hasStatus(name) {
+        return this.status.some(status => status.name === name);
+    }
+    updateStatus() {
+        var elements = document.getElementsByClassName("status");
+        while (elements.length > 0) {
+            if (elements[0].parentNode != null) {
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+        }
+        for (let i = 0; i < this.status.length; i++) {
+            const statusUI = document.createElement("div");
+            const leftPanel = document.getElementById("stats");
+            statusUI.className = "status";
+            statusUI.innerText = this.status[i].name;
+            leftPanel.appendChild(statusUI);
+            console.log(this.status[i]);
+        }
     }
 }
 let char = [];
@@ -99,11 +145,20 @@ function createCharacter() {
             wis: 2,
         });
     }
+    for (let i = 0; i < char.length; i++) {
+        const charUI = document.createElement("div");
+        const rightPanel = document.getElementById("stats");
+        charUI.className = "stats";
+        charUI.innerText = char[i].name;
+        rightPanel.appendChild(charUI);
+        console.log(char[i]);
+    }
 }
 // Scene Manager
 function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
+    let status = new Status;
     let health = 3;
     let healthMax = 3;
     function chooseScene() {
@@ -131,6 +186,12 @@ function startScene() {
         if (choice.removeItem) {
             inventory.removeItem(choice.removeItem);
         }
+        if (choice.addStatus) {
+            status.addStatus(choice.addStatus);
+        }
+        if (choice.removeStatus) {
+            status.removeStatus(choice.removeStatus);
+        }
         if (choice.addHealth) {
             health = Math.min(health + choice.addHealth, healthMax);
         }
@@ -144,7 +205,7 @@ function startScene() {
         }
         const scene = sceneData[currentScene];
         scene.choices = scene.choices.filter(c => c !== choice);
-        if (choice.requiredItem && inventory.hasItem(choice.requiredItem)) {
+        if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < char[0].dex || choice.requiredSTR && choice.requiredSTR < char[0].str || choice.requiredWIS && choice.requiredWIS < char[0].wis) {
             currentScene = choice.alternateNext;
         }
         else {

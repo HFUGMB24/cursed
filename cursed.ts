@@ -1,21 +1,24 @@
 // Scene Interface
-interface Scene
-{
+interface Scene {
     text: string;
     choices: Choice[];
 }
 
-interface Choice
-{
+interface Choice {
     text: string;
     next: string;
     addItem?: string;
     removeItem?: string;
+    addStatus?: string;
+    removeStatus?: string;
     requiredItem?: string;
     alternateNext?: string;
     reload?: boolean;
     addHealth?: number;
     removeHealth?: number;
+    requiredSTR?: number;
+    requiredDEX?: number;
+    requiredWIS?: number;
 }
 
 // Scene Data
@@ -37,7 +40,7 @@ const sceneData: { [key: string]: Scene; } = {
     path: {
         text: "You walk down the path and find a map.",
         choices: [
-            { text: "Look at the map", next: "map" },
+            { text: "Look at the map", next: "map", addItem: "health potion", addStatus: "poisoned" },
             { text: "Keep walking", next: "deep_forest", addHealth: 1 }
         ]
     },
@@ -64,77 +67,94 @@ const sceneData: { [key: string]: Scene; } = {
 };
 
 // Inventory
-interface Item
-{
+interface Item {
     name: string;
 }
 
-class Inventory
-{
-    private items: Item[] = [];
+class Inventory {
+    public items: Item[] = [];
 
-    addItem(name: string): void
-    {
+    addItem(name: string): void {
         this.items.push({
             name,
         });
-        const itemUI = document.createElement("div");
-        const rightPanel = document.getElementById("right-panel")!;
-        itemUI.className = "item";
-        itemUI.innerText = Inventory.name;
-        rightPanel.appendChild(itemUI);
-
+        this.updateItems();
     }
 
-    removeItem(name: string): void
-    {
+    removeItem(name: string): void {
         this.items = this.items.filter(item => item.name !== name);
+        this.updateItems();
     }
 
-    hasItem(name: string): boolean
-    {
+    hasItem(name: string): boolean {
         return this.items.some(item => item.name === name);
+    }
+
+    updateItems() {
+        var elements = document.getElementsByClassName("item");
+            while (elements.length > 0) {
+                if (elements[0].parentNode != null) {
+                    elements[0].parentNode.removeChild(elements[0]);
+                }
+            }
+        for (let i: number = 0; i < this.items.length; i++) {
+            const itemUI = document.createElement("div");
+            const rightPanel = document.getElementById("inventory")!;
+            itemUI.className = "item";
+            itemUI.innerText = this.items[i].name;
+            rightPanel.appendChild(itemUI);
+            console.log(this.items[i]);
+        }
     }
 }
 
-// Inventory
-interface Status
-{
+// Status
+interface StatusData {
     name: string;
 }
 
-// class Status
-// {
-//     private status: Status[] = [];
+class Status
+{
+    public status: StatusData[] = [];
 
-//     addStatus(name: string): void
-//     {
-//         this.status.push({
-//             name,
-//         });
+    addStatus(name: string): void
+    {
+        this.status.push({
+            name,
+        });
+        this.updateStatus();
+    }
 
-//         const statusUI = document.createElement("div");
-//         const leftPanel = document.getElementById("left-panel")!;
-//         statusUI.className = "status";
-//         statusUI.innerText = Status.name;
-//         leftPanel.appendChild(statusUI);
+    removeStatus(name: string): void
+    {
+        this.status = this.status.filter(status => status.name !== name);
+    }
 
-//     }
+    hasStatus(name: string): boolean
+    {
+        return this.status.some(status => status.name === name);
+    }
 
-//     removeStatus(name: string): void
-//     {
-//         this.status = this.status.filter(status => status.name !== name);
-//     }
-
-//     hasStatus(name: string): boolean
-//     {
-//         return this.status.some(status => status.name === name);
-//     }
-// }
+    updateStatus() {
+        var elements = document.getElementsByClassName("status");
+            while (elements.length > 0) {
+                if (elements[0].parentNode != null) {
+                    elements[0].parentNode.removeChild(elements[0]);
+                }
+            }
+        for (let i: number = 0; i < this.status.length; i++) {
+            const statusUI = document.createElement("div");
+            const leftPanel = document.getElementById("stats")!;
+            statusUI.className = "status";
+            statusUI.innerText = this.status[i].name;
+            leftPanel.appendChild(statusUI);
+            console.log(this.status[i]);
+        }
+    }
+}
 
 // Character Information
-interface CharacterStats
-{
+interface CharacterStats {
     name: string;
     class: string;
     health: number;
@@ -145,8 +165,7 @@ interface CharacterStats
 
 let char: CharacterStats[] = [];
 
-function createCharacter()
-{
+function createCharacter() {
     if (1 == 1) // Character 1
     {
         char.push({
@@ -178,33 +197,37 @@ function createCharacter()
             wis: 2,
         });
     }
+    for (let i: number = 0; i < char.length; i++) {
+        const charUI = document.createElement("div");
+        const rightPanel = document.getElementById("stats")!;
+        charUI.className = "stats";
+        charUI.innerText = char[i].name;
+        rightPanel.appendChild(charUI);
+        console.log(char[i]);
+    }
 }
 
 
 // Scene Manager
-function startScene()
-{
+function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
+    let status = new Status;
     let health = 3;
     let healthMax = 3;
 
-    function chooseScene()
-    {
+    function chooseScene() {
         const scene = sceneData[currentScene];
         const textContainer = document.getElementById("desc");
         const choicesContainer = document.getElementById("choices");
 
-        if (textContainer)
-        {
+        if (textContainer) {
             textContainer.innerHTML = `<p>${scene.text}</p>`;
         }
 
-        if (choicesContainer)
-        {
+        if (choicesContainer) {
             choicesContainer.innerHTML = "";
-            scene.choices.forEach(choice =>
-            {
+            scene.choices.forEach(choice => {
                 const button = document.createElement("button");
                 button.className = "choice";
                 button.innerText = choice.text;
@@ -214,29 +237,30 @@ function startScene()
         }
     }
 
-    function handleChoice(choice: Choice)
-    {
-        if (choice.addItem)
-        {
+    function handleChoice(choice: Choice) {
+        if (choice.addItem) {
             inventory.addItem(choice.addItem);
         }
-        if (choice.removeItem)
-        {
+        if (choice.removeItem) {
             inventory.removeItem(choice.removeItem);
         }
 
-        if (choice.addHealth)
-        {
+        if (choice.addStatus) {
+            status.addStatus(choice.addStatus);
+        }
+        if (choice.removeStatus) {
+            status.removeStatus(choice.removeStatus);
+        }
+
+        if (choice.addHealth) {
             health = Math.min(health + choice.addHealth, healthMax);
         }
-        if (choice.removeHealth)
-        {
+        if (choice.removeHealth) {
             health = Math.max(health - choice.removeHealth, 0);
         }
         updateHealth();
 
-        if (choice.reload)
-        {
+        if (choice.reload) {
             location.reload();
             return;
         }
@@ -244,22 +268,18 @@ function startScene()
         const scene = sceneData[currentScene];
         scene.choices = scene.choices.filter(c => c !== choice);
 
-        if (choice.requiredItem && inventory.hasItem(choice.requiredItem))
-        {
+        if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < char[0].dex || choice.requiredSTR && choice.requiredSTR < char[0].str || choice.requiredWIS && choice.requiredWIS < char[0].wis) {
             currentScene = choice.alternateNext!;
-        } else
-        {
+        } else {
             currentScene = choice.next;
         }
 
         chooseScene();
     }
 
-    function updateHealth()
-    {
+    function updateHealth() {
         const healthUI = document.getElementById("health-ui");
-        if (healthUI)
-        {
+        if (healthUI) {
             healthUI.innerHTML = `Health: ${health}/${healthMax}`;
         }
     }
@@ -267,7 +287,6 @@ function startScene()
 }
 
 // Start on Load
-document.addEventListener("DOMContentLoaded", () =>
-{
+document.addEventListener("DOMContentLoaded", () => {
     startScene();
 });
