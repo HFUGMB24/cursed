@@ -144,31 +144,58 @@ interface Choice {
 // Scene Data
 const sceneData: { [key: string]: Scene; } = {
     start: {
-        text: "You are in a dark forest. You see a path ahead.",
+        text: "In the scorching desert heat, you see the majestic silhouette of the ancient temple. Your heart beats with excitement as you approach the mysterious entrance. The imposing gate invites you to step inside. With trembling hands, you take the step into the dark vestibule of the temple. Somewhere in these chambers lies one of the most precious treasures of the ancient civilization. A cursed treasure.",
         choices: [
             {
-                text: "Take the path",
-                next: "path",
+                text: "Enter the temple.",
+                next: "entrance_hall",
                 addItem: "map"
             },
             {
                 text: "Stay here",
-                next: "stay"
+                next: "retry"
             }
         ]
     },
-    path: {
-        text: "You walk down the path and find a map.",
+    entrance_hall: {
+        text: "You find yourself in a huge entrance chamber. Faded symbols are engraved on the old stonewalls. Several paths lead from here deeper into the temple. Which one do you wanne choose.",
         choices: [
-            { text: "Look at the map", next: "map", addItem: "health potion", removeItem: "map", addStatus: "poisoned" },
-            { text: "Keep walking", next: "deep_forest", addHealth: 1 }
+            { text: "To your right you see a small passage between two statues of black cats with golden eyes.", next: "cat_passage"},
+            { text: "An enormous door decorated with golden hyroglyphes is right infront of you.", next: "pit_room"},
+            { text: "As you take a closer look you found another way. A hidden door behind a painting of a scarab.", next: "painting_room"},
         ]
     },
-    map: {
-        text: "The map shows a hidden treasure.",
+    cat_passage: {
+        text: "Entering the mysterious room through the narrow passage between the majestic cat statues, you are greeted by the scent of old books filling the air. As you look around, you discover a variety of ancient scrolls and books.",
         choices: [
-            { text: "Search for treasure", next: "treasure", removeStatus: "poisoned" },
-            { text: "Ignore the map", next: "deep_forest", removeHealth: 1 }
+            { text: "You can examine one of the papyrus scrolls more closely.", next: "scroll_of_truth", addItem: "Scroll of Truth"},
+            { text: "You can search the shelves for a hidden compartment.", next: "healing_potion_1", addItem: "Healing Potion"},
+            { text: "You can inspect one of the parchment scrolls more closely.", next: "scroll_of_truth", addItem: "Scroll of Truth"},
+        ]
+    },
+    scroll_of_truth: {
+        text: "You find a mysterious scroll. For the last months you studied hyroglyphes and know the effort pays off. The Scroll of Truth explains a short ritual to break the curse. Now you just need to find the treasure, but the door on the other side of the room is locked.",
+        choices: [
+            { text: "Go back.", next: "entrance_hall" },
+            { text: "Try to lockpick the door.", next: "mummy", requiredDEX: 12 },
+            { text: "Try to breakt the door.", next: "mummy", requiredSTR: 12 },
+        ]
+    },
+    healing_potion_1: {
+        text: "You find a small jar with a red shimmering liquid in it. A healing potion. Just in case you get in a fight and get hurt. Now you just need to find the treasure, but the door on the other side of the room is locked.",
+        choices: [
+            { text: "Go back.", next: "entrance_hall" },
+            { text: "Try to lockpick the door.", next: "mummy", requiredDEX: 12 },
+            { text: "Try to breakt the door.", next: "mummy", requiredSTR: 12 },
+        ]
+    },
+    mummy: {
+        text: "You enter a room full of sand in which there are three sarcophagi. As you take a closer look you find that one of the sarcophagi is broken. A hand grabs your ankle. As you look down you see a mummy burried in the sand. It seems like it want to tell you something.",
+        choices: [
+            { text: "Fight the mummy.", next: "treasure_way_hurt", removeHealth: 2, addStatus: "poisoned"},
+            { text: "Kill the mummy.", next: "treasure_way", requiredSTR: 12},
+            { text: "Talk to the mummy.", next: "treasure_way_hurt", removeHealth: 2, addStatus: "poisoned"},
+            { text: "Convince the mummy to help you.", next: "healing_potion_2", requiredWIS: 12, addItem: "Healing Potion"},
         ]
     },
     retry: {
