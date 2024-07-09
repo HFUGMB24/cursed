@@ -7,6 +7,12 @@
     <title>Cursed Temple</title>
     <link rel="stylesheet" href="style.css">
     <script src="cursed.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Six+Caps&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -15,18 +21,54 @@
         <div class="stats" id="stats"></div>
         <div class="status-effect" id="status-effect"></div>
     </span>
-        <div class="desc" id="desc"></div>
-        <div class=""></div>
-        <div class="choices" id="choices"></div>
+    <div class="desc" id="desc"></div>
+    <div class=""></div>
+    <div class="choices" id="choices"></div>
     <span class="right-panel" id="right-panel">
         <div class="inventory" id="inventory"></div>
         <div class="map"></div>
     </span>
+    <canvas width="1920" height="1080" class="background" id="background"></canvas>
     <span id="Character">
-        <button type="button" id="Character1">Wasabi</button>
-        <button type="button" id="Character2">Kiri</button>
-        <button type="button" id="Character3">Hazel</button>
+        <button type="button" id="Character1">
+            <h1>Wasabi</h1>
+            <img src="https://picsum.photos/200/300" class="image">
+            <h2 class="CharStats">
+                Class: Fighter <br>
+                HP: 3 <br>
+                Str: 12 <br>
+                Dex: 10 <br>
+                Wis: 8 </h2>
+                <h3 class="backstory">
+                    As a determined young warrior seeking a place to hone his skills, he heard from a wise wanderer by the campfire about a mysterious temple in the desert known as a site of trials and training to attain true strength.
+                </h3>
+        </button>
+        <button type="button" id="Character2">
+            <h1>Kiri</h1>
+            <img src="https://picsum.photos/200/300" class="image">
+            <h2 class="CharStats">
+                Class: Rogue <br>
+                HP: 3 <br>
+                Str: 10<br>
+                Dex: 12<br>
+                Wis: 8</h2>
+                <h3 class="backstory">
+                    As a notorious robber seeking wealth, you have sold your stolen treasures on the black market. There, you hear of a legend about a temple in the desert said to hold a great treasure.
+                </h3>
+        </button>
+        <button type="button" id="Character3">
+            <h1>Hazel</h1>
+            <img src="https://picsum.photos/200/300" class="image">
+            <h2 class="CharStats">
+                Class: Sage <br>
+                HP: 3 <br>
+                Str: 8<br>
+                Dex: 10<br>
+                Wis: 12</h2>
+                <h3 class="backstory">
+                    On his lifelong journey for knowledge and power, the wise wanderer learned from ancient scrolls of a mysterious place in the desert that was said to bestow upon him unparalleled power and wisdom.
+                </h3>
+        </button>
     </span>
 </body>
-
 </html>

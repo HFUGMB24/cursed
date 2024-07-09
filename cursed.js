@@ -28,28 +28,35 @@ function selectCharacter() {
     let button1 = document.getElementById('Character1');
     let button2 = document.getElementById('Character2');
     let button3 = document.getElementById('Character3');
+    let background = document.getElementById("background");
     button1.addEventListener('click', function handleClick(_event) {
         chosenCharacter.push(Character1);
         console.log(chosenCharacter[0]);
         const element = document.getElementById("Character");
+        startScene();
         updateStats();
+        console.log(background);
+        background.remove();
         element.remove();
     });
     button2.addEventListener('click', function handleClick(_event) {
         console.log(chosenCharacter);
         chosenCharacter.push(Character2);
         const element = document.getElementById("Character");
+        startScene();
         updateStats();
+        background.remove();
         element.remove();
     });
     button3.addEventListener('click', function handleClick(_event) {
         console.log(chosenCharacter);
         chosenCharacter.push(Character3);
         const element = document.getElementById("Character");
+        startScene();
         updateStats();
+        background.remove();
         element.remove();
     });
-    startScene();
 }
 function updateStats() {
     const leftPanel = document.getElementById("stats");
@@ -98,14 +105,14 @@ const sceneData = {
     path: {
         text: "You walk down the path and find a map.",
         choices: [
-            { text: "Look at the map", next: "map", addItem: "health potion", addStatus: "poisoned" },
+            { text: "Look at the map", next: "map", addItem: "health potion", removeItem: "map", addStatus: "poisoned" },
             { text: "Keep walking", next: "deep_forest", addHealth: 1 }
         ]
     },
     map: {
         text: "The map shows a hidden treasure.",
         choices: [
-            { text: "Search for treasure", next: "treasure" },
+            { text: "Search for treasure", next: "treasure", removeStatus: "poisoned" },
             { text: "Ignore the map", next: "deep_forest", removeHealth: 1 }
         ]
     },
@@ -169,6 +176,7 @@ class Status {
     }
     removeStatus(name) {
         this.status = this.status.filter(status => status.name !== name);
+        this.updateStatus();
     }
     hasStatus(name) {
         return this.status.some(status => status.name === name);
@@ -196,7 +204,7 @@ function startScene() {
     let inventory = new Inventory;
     let status = new Status;
     let health = 3;
-    let healthMax = 3;
+    let healthMax = chosenCharacter[0].HP;
     function chooseScene() {
         const scene = sceneData[currentScene];
         const textContainer = document.getElementById("desc");
@@ -253,6 +261,10 @@ function startScene() {
         const healthUI = document.getElementById("health-ui");
         if (healthUI) {
             healthUI.innerHTML = `Health: ${health}/${healthMax}`;
+        }
+        if (health <= 0) {
+            currentScene = "retry";
+            chooseScene();
         }
     }
     chooseScene();

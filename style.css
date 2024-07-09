@@ -1,4 +1,34 @@
-body {
+.amita-regular {
+    font-family: "Amita", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .amita-bold {
+    font-family: "Amita", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .jersey-25-regular {
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .jacquard-12-regular {
+    font-family: "Jacquard 12", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .six-caps-regular {
+    font-family: "Six Caps", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -150,4 +180,104 @@ body {
     height: fit-content;
     display: inline;
     height: 1em;
+}
+
+#Character1 {
+    position: absolute;
+    top: 5%;
+    left: 3%;
+    display: grid;
+    width: 30%;
+    height: 90%;
+    background: linear-gradient(to bottom, beige, white);
+    border-width: 0.5em;
+    border-style: ridge;
+    border-radius: 1.5%;
+    border-color: bisque;
+}
+
+#Character1:hover {
+    border-color: sienna;
+    background: linear-gradient(to bottom, rgb(215, 144, 111), white);
+}
+
+#Character2 {
+    position: absolute;
+    top: 5%;
+    left: 35%;
+    display: grid;
+    width: 30%;
+    height: 90%;
+    background: linear-gradient(to bottom, beige, white);
+    border-width: 0.5em;
+    border-style: ridge;
+    border-radius: 1.5%;
+    border-color: bisque;
+}
+
+#Character2:hover {
+    border-color: sienna;
+    background: linear-gradient(to bottom, rgb(215, 144, 111), white);
+}
+
+#Character3 {
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    display: grid;
+    width: 30%;
+    height: 90%;
+    background: linear-gradient(to bottom, beige, white);
+    border-width: 0.5em;
+    border-style: ridge;
+    border-radius: 1.5%;
+    border-color: bisque;
+}
+
+#Character3:hover {
+    border-color: sienna;
+    background: linear-gradient(to bottom, rgb(215, 144, 111), white);
+}
+
+canvas {
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    --s: 20px; /* control the size */
+    --c: #e9e1da;
+    
+    --_g: 
+      #0000 calc(-650%/13) calc(50%/13),var(--c) 0 calc(100%/13),
+      #0000 0 calc(150%/13),var(--c) 0 calc(200%/13),
+      #0000 0 calc(250%/13),var(--c) 0 calc(300%/13);
+    --_g0: repeating-linear-gradient( 45deg,var(--_g));
+    --_g1: repeating-linear-gradient(-45deg,var(--_g));
+    background:
+      var(--_g0),var(--_g0) var(--s) var(--s),
+      var(--_g1),var(--_g1) var(--s) var(--s) #e8e6dc;
+    background-size: calc(2*var(--s)) calc(2*var(--s));
+}
+
+img {
+    justify-self: center;
+    border-width: 0.5em;
+    border-style: ridge;
+    border-radius: 1.5%;
+    border-color: bisque;
+}
+
+h1 {
+    font-family: "Jersey 25", sans-serif;
+    font-size: 3em;
+}
+
+h2 {
+    font-family: "Jersey 25", sans-serif;
+    font-size: 2em;
+}
+
+h3 {
+    font-family: "Jersey 25", sans-serif;
+    font-size: 1.5em;
+    margin: 2em;
 }
