@@ -41,12 +41,16 @@ function selectCharacter() {
     let button1 = <HTMLElement>document.getElementById('Character1');
     let button2 = <HTMLElement>document.getElementById('Character2');
     let button3 = <HTMLElement>document.getElementById('Character3');
+    let background = document.getElementById("background")!;
 
     button1.addEventListener('click', function handleClick(_event) {
         chosenCharacter.push(Character1);
         console.log(chosenCharacter[0]);
         const element = <HTMLElement>document.getElementById("Character");
+        startScene();
         updateStats();
+        console.log(background);
+        background.remove();
         element.remove();
     });
 
@@ -54,7 +58,11 @@ function selectCharacter() {
         console.log(chosenCharacter);
         chosenCharacter.push(Character2);
         const element = <HTMLElement>document.getElementById("Character");
+        startScene();
         updateStats();
+
+        background.remove();
+
         element.remove();
     });
 
@@ -62,16 +70,21 @@ function selectCharacter() {
         console.log(chosenCharacter);
         chosenCharacter.push(Character3);
         const element = <HTMLElement>document.getElementById("Character");
+        startScene();
         updateStats();
+
+        background.remove();
+
         element.remove();
     });
 
-    startScene();
+
 }
 
 function updateStats() {
     const leftPanel = document.getElementById("stats")!;
     const healthUI = document.getElementById("health-ui")!;
+
 
     const charHealth = document.createElement("div");
     charHealth.className = "char-stats";
@@ -259,6 +272,7 @@ class Status {
 
     removeStatus(name: string): void {
         this.status = this.status.filter(status => status.name !== name);
+        this.updateStatus();
     }
 
     hasStatus(name: string): boolean {
@@ -289,7 +303,7 @@ function startScene() {
     let inventory = new Inventory;
     let status = new Status;
     let health = 3;
-    let healthMax = 3;
+    let healthMax = chosenCharacter[0].HP;
 
     function chooseScene() {
         const scene = sceneData[currentScene];
@@ -356,6 +370,10 @@ function startScene() {
         const healthUI = document.getElementById("health-ui");
         if (healthUI) {
             healthUI.innerHTML = `Health: ${health}/${healthMax}`;
+        }
+        if (health <= 0) {
+            currentScene = "retry";
+            chooseScene();
         }
     }
     chooseScene();
