@@ -37,30 +37,73 @@ let Character3 = {
 
 let chosenCharacter: Character[] = [];
 
-let button1 = <HTMLElement>document.getElementById('Character1');
-let button2 = <HTMLElement>document.getElementById('Character2');
-let button3 = <HTMLElement>document.getElementById('Character3');
+function selectCharacter() {
+    let button1 = <HTMLElement>document.getElementById('Character1');
+    let button2 = <HTMLElement>document.getElementById('Character2');
+    let button3 = <HTMLElement>document.getElementById('Character3');
 
-button1.addEventListener('click', function handleClick(_event) {
-    chosenCharacter.push(Character1);
-    console.log("one");
-    const element = <HTMLElement>document.getElementById("Character");
-    element.remove(); 
-});
+    button1.addEventListener('click', function handleClick(_event) {
+        chosenCharacter.push(Character1);
+        console.log(chosenCharacter[0]);
+        const element = <HTMLElement>document.getElementById("Character");
+        updateStats();
+        element.remove();
+    });
 
-button2.addEventListener('click', function handleClick(_event) {
-    console.log("two");
-    chosenCharacter.push(Character2);
-    const element = <HTMLElement>document.getElementById("Character");
-    element.remove();  
-});
+    button2.addEventListener('click', function handleClick(_event) {
+        console.log(chosenCharacter);
+        chosenCharacter.push(Character2);
+        const element = <HTMLElement>document.getElementById("Character");
+        updateStats();
+        element.remove();
+    });
 
-button3.addEventListener('click', function handleClick(_event) {
-    console.log("three");
-    chosenCharacter.push(Character3);
-    const element = <HTMLElement>document.getElementById("Character");
-    element.remove(); 
-});
+    button3.addEventListener('click', function handleClick(_event) {
+        console.log(chosenCharacter);
+        chosenCharacter.push(Character3);
+        const element = <HTMLElement>document.getElementById("Character");
+        updateStats();
+        element.remove();
+    });
+
+    startScene();
+}
+
+function updateStats() {
+    const leftPanel = document.getElementById("stats")!;
+    const healthUI = document.getElementById("health-ui")!;
+
+    const charHealth = document.createElement("div");
+    charHealth.className = "char-stats";
+    charHealth.innerText = "HP: " + chosenCharacter[0].HP + " / 3";
+    healthUI.appendChild(charHealth);
+
+    const charName = document.createElement("div");
+    charName.className = "char-stats";
+    charName.innerText = chosenCharacter[0].name;
+    leftPanel.appendChild(charName);
+
+    const charClass = document.createElement("div");
+    charClass.className = "char-stats";
+    charClass.innerText = chosenCharacter[0].class;
+    leftPanel.appendChild(charClass);
+
+    const charStr = document.createElement("div");
+    charStr.className = "char-stats";
+    charStr.innerText = "STR: " + chosenCharacter[0].Str;
+    leftPanel.appendChild(charStr);
+
+    const charDex = document.createElement("div");
+    charDex.className = "char-stats";
+    charDex.innerText = "DEX: " + chosenCharacter[0].Dex;
+    leftPanel.appendChild(charDex);
+
+    const charWis = document.createElement("div");
+    charWis.className = "char-stats";
+    charWis.innerText = "Wis: " + chosenCharacter[0].Wis;
+    leftPanel.appendChild(charWis);
+}
+
 
 // Scene Interface
 interface Scene {
@@ -156,11 +199,11 @@ class Inventory {
 
     updateItems() {
         var elements = document.getElementsByClassName("item");
-            while (elements.length > 0) {
-                if (elements[0].parentNode != null) {
-                    elements[0].parentNode.removeChild(elements[0]);
-                }
+        while (elements.length > 0) {
+            if (elements[0].parentNode != null) {
+                elements[0].parentNode.removeChild(elements[0]);
             }
+        }
         for (let i: number = 0; i < this.items.length; i++) {
             const itemUI = document.createElement("div");
             const rightPanel = document.getElementById("inventory")!;
@@ -177,38 +220,34 @@ interface StatusData {
     name: string;
 }
 
-class Status
-{
+class Status {
     public status: StatusData[] = [];
 
-    addStatus(name: string): void
-    {
+    addStatus(name: string): void {
         this.status.push({
             name,
         });
         this.updateStatus();
     }
 
-    removeStatus(name: string): void
-    {
+    removeStatus(name: string): void {
         this.status = this.status.filter(status => status.name !== name);
     }
 
-    hasStatus(name: string): boolean
-    {
+    hasStatus(name: string): boolean {
         return this.status.some(status => status.name === name);
     }
 
     updateStatus() {
         var elements = document.getElementsByClassName("status");
-            while (elements.length > 0) {
-                if (elements[0].parentNode != null) {
-                    elements[0].parentNode.removeChild(elements[0]);
-                }
+        while (elements.length > 0) {
+            if (elements[0].parentNode != null) {
+                elements[0].parentNode.removeChild(elements[0]);
             }
+        }
         for (let i: number = 0; i < this.status.length; i++) {
             const statusUI = document.createElement("div");
-            const leftPanel = document.getElementById("stats")!;
+            const leftPanel = document.getElementById("status-effect")!;
             statusUI.className = "status";
             statusUI.innerText = this.status[i].name;
             leftPanel.appendChild(statusUI);
@@ -216,61 +255,6 @@ class Status
         }
     }
 }
-
-// Character Information
-interface CharacterStats {
-    name: string;
-    class: string;
-    health: number;
-    str: number;
-    dex: number;
-    wis: number;
-}
-
-let char: CharacterStats[] = [];
-
-function createCharacter() {
-    if (1 == 1) // Character 1
-    {
-        char.push({
-            name: "",
-            class: "",
-            health: 2,
-            str: 2,
-            dex: 2,
-            wis: 2,
-        });
-    } if (1 == 1) // Character 2
-    {
-        char.push({
-            name: "",
-            class: "",
-            health: 2,
-            str: 2,
-            dex: 2,
-            wis: 2,
-        });
-    } if (1 == 1) // Character 3
-    {
-        char.push({
-            name: "",
-            class: "",
-            health: 2,
-            str: 2,
-            dex: 2,
-            wis: 2,
-        });
-    }
-    for (let i: number = 0; i < char.length; i++) {
-        const charUI = document.createElement("div");
-        const rightPanel = document.getElementById("stats")!;
-        charUI.className = "stats";
-        charUI.innerText = char[i].name;
-        rightPanel.appendChild(charUI);
-        console.log(char[i]);
-    }
-}
-
 
 // Scene Manager
 function startScene() {
@@ -332,7 +316,7 @@ function startScene() {
         const scene = sceneData[currentScene];
         scene.choices = scene.choices.filter(c => c !== choice);
 
-        if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < char[0].dex || choice.requiredSTR && choice.requiredSTR < char[0].str || choice.requiredWIS && choice.requiredWIS < char[0].wis) {
+        if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < chosenCharacter[0].Dex || choice.requiredSTR && choice.requiredSTR < chosenCharacter[0].Str || choice.requiredWIS && choice.requiredWIS < chosenCharacter[0].Wis) {
             currentScene = choice.alternateNext!;
         } else {
             currentScene = choice.next;
@@ -352,5 +336,5 @@ function startScene() {
 
 // Start on Load
 document.addEventListener("DOMContentLoaded", () => {
-    startScene();
+    selectCharacter();
 });
