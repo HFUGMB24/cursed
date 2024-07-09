@@ -1,5 +1,6 @@
 "use strict";
-const dialogueData = {
+// Scene Data
+const sceneData = {
     start: {
         text: "You are in a dark forest. You see a path ahead.",
         choices: [
@@ -49,9 +50,12 @@ class Inventory {
     addItem(name) {
         this.items.push({
             name,
-            type: "",
-            amount: 0
         });
+        const itemUI = document.createElement("div");
+        const rightPanel = document.getElementById("right-panel");
+        itemUI.className = "item";
+        itemUI.innerText = Inventory.name;
+        rightPanel.appendChild(itemUI);
     }
     removeItem(name) {
         this.items = this.items.filter(item => item.name !== name);
@@ -60,13 +64,50 @@ class Inventory {
         return this.items.some(item => item.name === name);
     }
 }
+let char = [];
+function createCharacter() {
+    if (1 == 1) // Character 1
+     {
+        char.push({
+            name: "",
+            class: "",
+            health: 2,
+            str: 2,
+            dex: 2,
+            wis: 2,
+        });
+    }
+    if (1 == 1) // Character 2
+     {
+        char.push({
+            name: "",
+            class: "",
+            health: 2,
+            str: 2,
+            dex: 2,
+            wis: 2,
+        });
+    }
+    if (1 == 1) // Character 3
+     {
+        char.push({
+            name: "",
+            class: "",
+            health: 2,
+            str: 2,
+            dex: 2,
+            wis: 2,
+        });
+    }
+}
+// Scene Engine
 function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
     let health = 3;
     let healthMax = 3;
     function chooseScene() {
-        const scene = dialogueData[currentScene];
+        const scene = sceneData[currentScene];
         const textContainer = document.getElementById("desc");
         const choicesContainer = document.getElementById("choices");
         if (textContainer) {
@@ -96,11 +137,12 @@ function startScene() {
         if (choice.removeHealth) {
             health = Math.max(health - choice.removeHealth, 0);
         }
+        updateHealth();
         if (choice.reload) {
             location.reload();
             return;
         }
-        const scene = dialogueData[currentScene];
+        const scene = sceneData[currentScene];
         scene.choices = scene.choices.filter(c => c !== choice);
         if (choice.requiredItem && inventory.hasItem(choice.requiredItem)) {
             currentScene = choice.alternateNext;
@@ -110,6 +152,15 @@ function startScene() {
         }
         chooseScene();
     }
+    function updateHealth() {
+        const healthUI = document.getElementById("health-ui");
+        if (healthUI) {
+            healthUI.innerHTML = `Health: ${health}/${healthMax}`;
+        }
+    }
     chooseScene();
 }
-startScene();
+// Start on Load
+document.addEventListener("DOMContentLoaded", () => {
+    startScene();
+});
