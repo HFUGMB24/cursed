@@ -192,10 +192,53 @@ const sceneData: { [key: string]: Scene; } = {
     mummy: {
         text: "You enter a room full of sand in which there are three sarcophagi. As you take a closer look you find that one of the sarcophagi is broken. A hand grabs your ankle. As you look down you see a mummy burried in the sand. It seems like it want to tell you something.",
         choices: [
-            { text: "Fight the mummy.", next: "treasure_way_hurt", removeHealth: 2, addStatus: "poisoned"},
+            { text: "Fight the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "poisoned"},
             { text: "Kill the mummy.", next: "treasure_way", requiredSTR: 12},
-            { text: "Talk to the mummy.", next: "treasure_way_hurt", removeHealth: 2, addStatus: "poisoned"},
+            { text: "Talk to the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "poisoned"},
             { text: "Convince the mummy to help you.", next: "healing_potion_2", requiredWIS: 12, addItem: "Healing Potion"},
+        ]
+    },
+    healing_potion_2: {
+        text: "You find a small jar with a golden shimmering liquid in it. This must be a healing potion.",
+        choices: [
+            { text: "Go further.", next: "treasure_room" },
+        ]
+    },
+    treasure_way_hurt: {
+        text: "The mummy digs it sharp fingernails into your leg. You kick the mummy in the head and try to free yourself. Its grib loosened and you start running. A burning feeling fills your body. You have been poisoned and lose 1 HP.",
+        choices: [
+            { text: "Take a healing potion.", next: "treasure_room", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Keep running.", next: "treasure_room"},
+        ]
+    },
+    treasure_room: {
+        text: "You follow the dark hallway. It leads you deeper into the ancient temple. You make your way to the treasure room but find it guarded by a huge monster.",
+        choices: [
+            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
+            { text: "Try to talk to the monster.", next: "treasure_hurt_2", removeHealth: 2},
+            { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1},
+        ]
+    },
+    treasure_hurt_2: {
+        text: "The moment you open your mouth the monster lashes out at you with its claws. A sharp pain rushes through your shoulder.",
+        choices: [
+            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
+            { text: "Take a healing potion.", next: "treasure_room", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1},
+        ]
+    },
+    treasure_hurt_1: {
+        text: "The monster lashes out at you with its claws. You duck away and only one of the claws scratches over your arm.",
+        choices: [
+            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
+            { text: "Take a healing potion.", next: "treasure", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Continue to fight the monster.", next: "treasure"},
+        ]
+    },
+    treasure: {
+        text: "You look around and see a sharp looking stone laying on the ground. That is the weapon you needed. You let yourself drop to the ground, roll to the side and grab the stone. You aim at the monsters head and throw the stone with all of your strength. The beast collapses with a scream. You enter the last chamber and nearly stumble over a pile of old papyrus scrolls. The floor is covered",
+        choices: [
+            { text: "Try to sneak past the monster.", next: "end_1" },
         ]
     },
     retry: {
