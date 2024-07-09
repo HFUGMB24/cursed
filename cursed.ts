@@ -1,3 +1,67 @@
+// Choose Character
+interface Character {
+    name: string,
+    class: string,
+    HP: number,
+    Str: number,
+    Dex: number,
+    Wis: number,
+}
+
+let Character1 = {
+    name: "Wasabi",
+    class: "Fighter",
+    HP: 3,
+    Str: 12,
+    Dex: 10,
+    Wis: 8,
+}
+
+let Character2 = {
+    name: "Kiri",
+    class: "Rogue",
+    HP: 3,
+    Str: 10,
+    Dex: 12,
+    Wis: 8,
+}
+
+let Character3 = {
+    name: "Hazel",
+    class: "Sage",
+    HP: 3,
+    Str: 8,
+    Dex: 10,
+    Wis: 12,
+}
+
+let chosenCharacter: Character[] = [];
+
+let button1 = <HTMLElement>document.getElementById('Character1');
+let button2 = <HTMLElement>document.getElementById('Character2');
+let button3 = <HTMLElement>document.getElementById('Character3');
+
+button1.addEventListener('click', function handleClick(_event) {
+    chosenCharacter.push(Character1);
+    console.log("one");
+    const element = <HTMLElement>document.getElementById("Character");
+    element.remove(); 
+});
+
+button2.addEventListener('click', function handleClick(_event) {
+    console.log("two");
+    chosenCharacter.push(Character2);
+    const element = <HTMLElement>document.getElementById("Character");
+    element.remove();  
+});
+
+button3.addEventListener('click', function handleClick(_event) {
+    console.log("three");
+    chosenCharacter.push(Character3);
+    const element = <HTMLElement>document.getElementById("Character");
+    element.remove(); 
+});
+
 // Scene Interface
 interface Scene {
     text: string;
