@@ -106,7 +106,7 @@ const sceneData = {
             {
                 text: "Enter the temple.",
                 next: "entrance_hall",
-                addItem: "map"
+                addItem: "Map"
             },
             {
                 text: "Stay here",
@@ -149,9 +149,9 @@ const sceneData = {
     mummy: {
         text: "You enter a room full of sand in which there are three sarcophagi. As you take a closer look you find that one of the sarcophagi is broken. A hand grabs your ankle. As you look down you see a mummy burried in the sand. It seems like it want to tell you something.",
         choices: [
-            { text: "Fight the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "poisoned" },
+            { text: "Fight the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "Poisoned" },
             { text: "Kill the mummy.", next: "treasure_way", requiredSTR: 12 },
-            { text: "Talk to the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "poisoned" },
+            { text: "Talk to the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "Poisoned" },
             { text: "Convince the mummy to help you.", next: "healing_potion_2", requiredWIS: 12, addItem: "Healing Potion" },
         ]
     },
@@ -217,6 +217,90 @@ const sceneData = {
         text: "You take the Scroll of Truth and start to read the hyroglyphes out loud. Your heart beats faster as a golden glow begins to fill the room. Shimmering symbols appear in the air around you and vanishing in little blue flashes as you continue reading. The moment you reach the end of the text, all the symbols have disappeared and the glow ends. Carefully you pick up the treasure you've been looking for so long. It's easy to find your way out with your good sense of direction. This treasure will change your life for the better.",
         choices: [
             { text: "Leave the temple.", next: "end" },
+        ]
+    },
+    scarab_room: {
+        text: "You enter a hallway with two indentations. Each contains a pedestal. On the left pedestal sits a bronze Cage with a silver scarab trapped inside. On the Right pedestal sits a wooden bowl filled with small amounts of coins and small stone statuettes.",
+        choices: [
+            { text: "[WIS] Make a small offering.", next: "scarab_make_offering", requiredWIS: 12, addStatus: "Blessed" },
+            { text: "Free the scarab.", next: "scarab_free" },
+            { text: "Take the coins.", next: "scarab_take_coin", addItem: "Coins" },
+            { text: "Take the stone statuette.", next: "scarab_statuette", addItem: "Stone Statuette" },
+            { text: "Continue through the hallway.", next: "beast_room" }
+        ]
+    },
+    scarab_make_offering: {
+        text: "You leave a small offering in the wooden bowl. You feel blessed.",
+        choices: [
+            { text: "Free the scarab.", next: "scarab_free" },
+            { text: "Continue through the hallway.", next: "beast_room" }
+        ]
+    },
+    scarab_take_coin: {
+        text: "You Gather a handful of coins and feel the slightest sense of guilt settle in you.",
+        choices: [
+            { text: "Continue.", next: "scarab_room" },
+        ]
+    },
+    scarab_statuette: {
+        text: "You take a finely crafted stone statutette of a pregnant woman. The slightest sense of guilt settle in you.",
+        choices: [
+            { text: "Continue.", next: "scarab_room" },
+        ]
+    },
+    scarab_free: {
+        text: "You release the scarab from its captivity. It runs happily in a circle before it takes off across the room. It squeezes through a small gap in the wall behind the offering altar, revealing a hidden door.",
+        choices: [
+            { text: "Go through the secret door", next: "mummy" },
+            { text: "Continue through the hallway.", next: "beast_room" },
+        ]
+    },
+    beast_room: {
+        text: "You enter a new room and encounter an injured beast. The path is blocked by rubble but you notice a hole in the wall.",
+        choices: [
+            { text: "[Healing Potion] Aproach the beast and heal it.", next: "beast_room_help", removeItem: "Healing Potion" },
+            { text: "Leave the beast alone and explore the room.", next: "beast_room_artifact", addItem: "Ring of Strength" },
+            { text: "Slay the beast.", next: "beast_room_death" },
+        ]
+    },
+    beast_room_death: {
+        text: "The beast dies painfully screaming and rolling around. You can't reach the hole in the wall and have to dig through the rubble.",
+        choices: [
+            { text: "Use your weapon to dig.", next: "beast_room_dig_weapon", addStatus: "Broken Weapon" },
+            { text: "Use your hands to dig.", next: "beast_room_dig_hand" },
+        ]
+    },
+    beast_room_dig_weapon: {
+        text: "Your weapon gets damaged in the process of digging through the rubble.",
+        choices: [
+            { text: "Use your hands to dig.", next: "cat_room" },
+        ]
+    },
+    beast_room_dig_hand: {
+        text: "You get injured while digging through the rubble. You take 1 damage.",
+        choices: [
+            { text: "Use your hands to dig.", next: "cat_room" },
+        ]
+    },
+    beast_room_artifact: {
+        text: "You explore the room and find a ruby ring in a pile of broken clay shards.",
+        choices: [
+            { text: "[Healing Potion] Aproach the beast and heal it.", next: "beast_room_help", removeItem: "Healing Potion" },
+            { text: "Explore the hole in the wall.", next: "beast_room_hole" },
+            { text: "Slay the beast.", next: "beast_room_death" },
+        ]
+    },
+    beast_room_hole: {
+        text: "You sneak past the beast. You can't reach the hole in the wall and have to dig through the rubble.",
+        choices: [
+            { text: "Use your weapon to dig.", next: "beast_room_dig_weapon", addStatus: "Broken Weapon" },
+            { text: "Use your hands to dig.", next: "beast_room_dig_hand" },
+        ]
+    },
+    beast_room_help: {
+        text: "The beast is thankful for your help and carries you to the hole in the wall.",
+        choices: [
+            { text: "Continue.", next: "cat_room" },
         ]
     },
     retry: {
@@ -377,19 +461,17 @@ function startScene() {
 document.addEventListener("DOMContentLoaded", () => {
     selectCharacter();
 });
-// Map
-// let map = <HTMLElement>document.getElementById('map');
-// let largeMap =  <HTMLElement>document.getElementById("large-map")!;
-// let closeButton =  <HTMLElement>document.getElementById("close-button")!;
-// map.addEventListener('click', function handleClick(_event) {
-//     const lmap = document.createElement("img");
-//     lmap.className = "large-map";
-//     lmap.id = "large-map";
-//     lmap.innerText = "This is a map";
-//     const element = document.getElementById("left-panel")!;
-//     element.appendChild(lmap);
-// });
-// IGNORE THIS!! Fancy Suff for Buttons
+// IGNORE THIS!! 
+// IGNORE THIS!!
+// IGNORE THIS!! 
+// IGNORE THIS!! 
+// IGNORE THIS!! 
+// IGNORE THIS!! 
+// IGNORE THIS!! 
+// IGNORE THIS!! 
+// IGNORE THIS!! 
+// IGNORE THIS!! 
+// IGNORE THIS!! 
 const createSVG = (width, height, radius) => {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const rectangle = document.createElementNS("http://www.w3.org/2000/svg", "rect");
