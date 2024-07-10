@@ -16,7 +16,7 @@ let Character1 = {
     Str: 13,
     Dex: 10,
     Wis: 8,
-    avatar: "EarlGeier_LOKOSSAREAPER_port.png",
+    avatar: "Rufus_final_no_backround_p.png",
 };
 
 let Character2 = {
@@ -26,7 +26,7 @@ let Character2 = {
     Str: 10,
     Dex: 13,
     Wis: 8,
-    avatar: "LuigiCastellani_BOWMAN_port.png"
+    avatar: "Mika_final_no_backround_p.png"
 };
 
 let Character3 = {
@@ -36,7 +36,7 @@ let Character3 = {
     Str: 8,
     Dex: 10,
     Wis: 13,
-    avatar: "LuigiCastellani_SCHOLARSTAND_port.png",
+    avatar: "maxi_final_no_backround_p.png",
 };
 
 let chosenCharacter: Character[] = [];
@@ -90,7 +90,6 @@ function updateStats() {
     portrait.id = "portrait";
     portrait.src = "img/";
     portrait.src += chosenCharacter[0].avatar;
-    portrait.width = 150;
     avatar.appendChild(portrait);
 
     const healthUI = document.getElementById("health-ui")!;
