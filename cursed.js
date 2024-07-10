@@ -63,6 +63,7 @@ function updateStats() {
     const healthUI = document.getElementById("health-ui");
     const charHealth = document.createElement("div");
     charHealth.className = "char-stats";
+    charHealth.id = "char-health";
     charHealth.innerText = "HP: " + chosenCharacter[0].HP + " / 3";
     healthUI.appendChild(charHealth);
     const charName = document.createElement("div");
@@ -329,8 +330,9 @@ function startScene() {
     }
     function updateHealth() {
         const healthUI = document.getElementById("health-ui");
+        const charHealth = document.getElementById("char-health");
         if (healthUI) {
-            healthUI.innerHTML = `Health: ${health}/${healthMax}`;
+            charHealth.innerText = "HP: " + health + " / 3";
         }
         if (health <= 0) {
             currentScene = "retry";
@@ -342,4 +344,57 @@ function startScene() {
 // Start on Load
 document.addEventListener("DOMContentLoaded", () => {
     selectCharacter();
+});
+// Map
+// let map = <HTMLElement>document.getElementById('map');
+// let largeMap =  <HTMLElement>document.getElementById("large-map")!;
+// let closeButton =  <HTMLElement>document.getElementById("close-button")!;
+// map.addEventListener('click', function handleClick(_event) {
+//     const lmap = document.createElement("img");
+//     lmap.className = "large-map";
+//     lmap.id = "large-map";
+//     lmap.innerText = "This is a map";
+//     const element = document.getElementById("left-panel")!;
+//     element.appendChild(lmap);
+// });
+// IGNORE THIS!! Fancy Suff for Buttons
+const createSVG = (width, height, radius) => {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const rectangle = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    svg.setAttributeNS("http://www.w3.org/2000/svg", "viewBox", `0 0 ${width} ${height}`);
+    rectangle.setAttribute("x", "0");
+    rectangle.setAttribute("y", "0");
+    rectangle.setAttribute("width", "100%");
+    rectangle.setAttribute("height", "100%");
+    rectangle.setAttribute("rx", `${radius}`);
+    rectangle.setAttribute("ry", `${radius}`);
+    rectangle.setAttribute("pathLength", "10");
+    svg.appendChild(rectangle);
+    return svg;
+};
+document.querySelectorAll(".CharacterButton").forEach((button) => {
+    const htmlButton = button;
+    const style = getComputedStyle(htmlButton);
+    const lines = document.createElement("div");
+    lines.classList.add("lines");
+    const groupTop = document.createElement("div");
+    const groupBottom = document.createElement("div");
+    const svg = createSVG(htmlButton.offsetWidth, htmlButton.offsetHeight, parseInt(style.borderRadius, 10));
+    groupTop.appendChild(svg);
+    groupTop.appendChild(svg.cloneNode(true));
+    groupTop.appendChild(svg.cloneNode(true));
+    groupTop.appendChild(svg.cloneNode(true));
+    groupBottom.appendChild(svg.cloneNode(true));
+    groupBottom.appendChild(svg.cloneNode(true));
+    groupBottom.appendChild(svg.cloneNode(true));
+    groupBottom.appendChild(svg.cloneNode(true));
+    lines.appendChild(groupTop);
+    lines.appendChild(groupBottom);
+    button.appendChild(lines);
+    button.addEventListener("pointerenter", () => {
+        button.classList.add("start");
+    });
+    svg.addEventListener("animationend", () => {
+        button.classList.remove("start");
+    });
 });
