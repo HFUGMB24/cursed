@@ -2,7 +2,7 @@
 let Character1 = {
     name: "Wasabi",
     class: "Fighter",
-    HP: 3,
+    HP: 5,
     Str: 13,
     Dex: 10,
     Wis: 8,
@@ -11,7 +11,7 @@ let Character1 = {
 let Character2 = {
     name: "Kiri",
     class: "Rogue",
-    HP: 3,
+    HP: 4,
     Str: 10,
     Dex: 13,
     Wis: 8,
@@ -75,7 +75,7 @@ function updateStats() {
     const charHealth = document.createElement("div");
     charHealth.className = "char-stats";
     charHealth.id = "char-health";
-    charHealth.innerText = "HP: " + chosenCharacter[0].HP + " / 3";
+    charHealth.innerText = "HP: " + chosenCharacter[0].HP + " / " + chosenCharacter[0].HP;
     healthUI.appendChild(charHealth);
     const charName = document.createElement("div");
     charName.className = "char-stats";
@@ -271,7 +271,7 @@ const sceneData = {
         text: "You descend the stairs and see a long corridor. At the end of the corridor is a steel door that opens into a room. In the center of the room is a magic circle, while a mysterious container rests in one corner.",
         choices: [
             { text: "Try to break open the chest.", next: "magic_circle_missingReq", requiredSTR: 12, alternateNext: "healing_potion_3" },
-            { text: "Try to lockpick the chest.", next: "magic_circle_missingReq", requiredDEX: 12, alternateNext: "healing_potion" },
+            { text: "Try to lockpick the chest.", next: "magic_circle_missingReq", requiredDEX: 12, alternateNext: "healing_potion_3" },
             { text: "Investigate the circle.", next: "entrance_hall" },
         ]
     },
@@ -601,7 +601,7 @@ function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
     let status = new Status;
-    let health = 3;
+    let health = chosenCharacter[0].HP;
     let healthMax = chosenCharacter[0].HP;
     function chooseScene() {
         const scene = sceneData[currentScene];
@@ -636,37 +636,45 @@ function startScene() {
         }
         if (choice.addHealth) {
             health = Math.min(health + choice.addHealth, healthMax);
+            updateHealth();
         }
         if (choice.removeHealth) {
             health = Math.max(health - choice.removeHealth, 0);
+            updateHealth();
         }
-        updateHealth();
         if (choice.reload) {
             location.reload();
             return;
         }
-        const scene = sceneData[currentScene];
-        scene.choices = scene.choices.filter(c => c !== choice);
-        if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < chosenCharacter[0].Dex || choice.requiredSTR && choice.requiredSTR < chosenCharacter[0].Str || choice.requiredWIS && choice.requiredWIS < chosenCharacter[0].Wis) {
-            currentScene = choice.alternateNext;
+        if (health > 0) {
+            const scene = sceneData[currentScene];
+            scene.choices = scene.choices.filter(c => c !== choice);
+            if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < chosenCharacter[0].Dex || choice.requiredSTR && choice.requiredSTR < chosenCharacter[0].Str || choice.requiredWIS && choice.requiredWIS < chosenCharacter[0].Wis) {
+                currentScene = choice.alternateNext;
+            }
+            else {
+                currentScene = choice.next;
+            }
+            chooseScene();
+            console.log(currentScene);
         }
-        else {
-            currentScene = choice.next;
-        }
-        chooseScene();
     }
     function updateHealth() {
         const healthUI = document.getElementById("health-ui");
         const charHealth = document.getElementById("char-health");
         if (healthUI) {
-            charHealth.innerText = "HP: " + health + " / 3";
+            charHealth.innerText = "HP: " + health + " / " + chosenCharacter[0].HP;
         }
-        if (health <= 0) {
+        if (health < 1) {
             currentScene = "end";
+            console.log(health);
+            console.log(currentScene);
             chooseScene();
+            console.log(currentScene);
         }
     }
     chooseScene();
+    console.log(currentScene);
 }
 // Start on Load
 document.addEventListener("DOMContentLoaded", () => {
