@@ -119,7 +119,7 @@ const sceneData = {
         choices: [
             { text: "To your right you see a small passage between two statues of black cats with golden eyes.", next: "cat_passage" },
             { text: "An enormous door decorated with golden hyroglyphes is right infront of you.", next: "stone_door" },
-            { text: "As you take a closer look you found another way. A hidden door behind a painting of a scarab.", next: "painting_room" },
+            { text: "As you take a closer look you found another way. A hidden door behind a painting of a scarab.", next: "scarab_room" },
         ]
     },
     cat_passage: {
