@@ -517,19 +517,19 @@ const sceneData: { [key: string]: Scene; } = {
         text: "The beast dies painfully screaming and rolling around. You can't reach the hole in the wall and have to dig through the rubble.",
         choices: [
             { text: "Use your weapon to dig.", next: "beast_room_dig_weapon", addStatus: "Broken Weapon" },
-            { text: "Use your hands to dig.", next: "beast_room_dig_hand" },
+            { text: "Use your hands to dig.", next: "beast_room_dig_hand", removeHealth: 1},
         ]
     },
     beast_room_dig_weapon: {
         text: "Your weapon gets damaged in the process of digging through the rubble.",
         choices: [
-            { text: "Use your hands to dig.", next: "traverse" },
+            { text: "Continue.", next: "traverse" },
         ]
     },
     beast_room_dig_hand: {
         text: "You get injured while digging through the rubble. You take 1 damage.",
         choices: [
-            { text: "Use your hands to dig.", next: "traverse" },
+            { text: "Continue.", next: "traverse" },
         ]
     },
     beast_room_artifact: {
@@ -550,7 +550,7 @@ const sceneData: { [key: string]: Scene; } = {
         text: "You sneak past the beast. You can't reach the hole in the wall and have to dig through the rubble.",
         choices: [
             { text: "Use your weapon to dig.", next: "beast_room_dig_weapon", addStatus: "Broken Weapon" },
-            { text: "Use your hands to dig.", next: "beast_room_dig_hand" },
+            { text: "Use your hands to dig.", next: "beast_room_dig_hand", removeHealth: 1},
         ]
     },
     beast_room_help: {
