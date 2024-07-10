@@ -606,11 +606,15 @@ h3 {
     color: white;
     cursor: pointer;
     border-radius: 0.5em;
+    background-image: url("img/EarlGeier_LOKOSSAREAPER.png");
 }
 
 .map:hover {
+    width: 88%;
+    height: 80%;
     border: 1px solid #333;
     background-color: rgba(3, 3, 3, 0.75);
+
 }
 
 .map:active {
