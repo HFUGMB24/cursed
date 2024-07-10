@@ -260,7 +260,7 @@ const sceneData: { [key: string]: Scene; } = {
     new_guard: {
         text: "Your fingertips touch the treasure you've been looking for so long. A smile sreads across your face as suddenly a strange feeling shakes your body. For a brief moment you loose your orientation. You close you eyes, take a deep breath and open them again. The ground seems further away than usual and you're pretty sure that you didn't have claws before. But you know those golden claws. Now you are the guardian of the treasure.",
         choices: [
-            { text: "Try again.", next: "retry" },
+            { text: "Try again!", next: "retry" },
         ]
     },
     happy_end: {
