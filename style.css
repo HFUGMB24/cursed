@@ -2,66 +2,95 @@
     font-family: "Amita", serif;
     font-weight: 400;
     font-style: normal;
-  }
-  
-  .amita-bold {
+}
+
+.amita-bold {
     font-family: "Amita", serif;
     font-weight: 700;
     font-style: normal;
-  }
+}
 
-  .jersey-25-regular {
+.jersey-25-regular {
     font-family: "Jersey 25", sans-serif;
     font-weight: 400;
     font-style: normal;
-  }
+}
 
-  .jacquard-12-regular {
+.jacquard-12-regular {
     font-family: "Jacquard 12", system-ui;
     font-weight: 400;
     font-style: normal;
-  }
-  
-  .six-caps-regular {
+}
+
+.six-caps-regular {
     font-family: "Six Caps", sans-serif;
     font-weight: 400;
     font-style: normal;
-  }
-  
-  body {
+}
+
+body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    --s: 80px; /* control the size */
-    --c: #e9e1da;
-    
-    --_g: 
-      #0000 calc(-650%/13) calc(50%/13),var(--c) 0 calc(100%/13),
-      #0000 0 calc(150%/13),var(--c) 0 calc(200%/13),
-      #0000 0 calc(250%/13),var(--c) 0 calc(300%/13);
-    --_g0: repeating-linear-gradient( 45deg,var(--_g));
-    --_g1: repeating-linear-gradient(-45deg,var(--_g));
+    --s: 20px;
+    /* control the size */
+    --c: #cfbcab;
+
+    --_g:
+        #0000 calc(-650%/13) calc(50%/13), var(--c) 0 calc(100%/13),
+        #0000 0 calc(150%/13), var(--c) 0 calc(200%/13),
+        #0000 0 calc(250%/13), var(--c) 0 calc(300%/13);
+    --_g0: repeating-linear-gradient(45deg, var(--_g));
+    --_g1: repeating-linear-gradient(-45deg, var(--_g));
     background:
-      var(--_g0),var(--_g0) var(--s) var(--s),
-      var(--_g1),var(--_g1) var(--s) var(--s) #e8e6dc;
+        var(--_g0), var(--_g0) var(--s) var(--s),
+        var(--_g1), var(--_g1) var(--s) var(--s) #c5c1ad;
     background-size: calc(2*var(--s)) calc(2*var(--s));
 }
 
 .left-panel {
+    display:flexbox;
+    flex-direction: column;
     position: absolute;
     top: 5%;
     left: 2%;
-    display: grid;
-    width: 15%;
+    width: 18%;
     height: 90%;
-    background-color: beige;
-    border-width: 0.5em;
-    border-style: ridge;
-    border-radius: 1.5%;
-    border-color: white;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, #fff, #f8eedb);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #482307;
+    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0;
+    outline: 2px solid transparent;
+    padding: 1rem 1.5rem;
+    text-transform: none;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+    --s: 20px;
+    /* control the size */
+    --c: #ffefe2;
+
+    --_g:
+        #0000 calc(-650%/13) calc(50%/13), var(--c) 0 calc(100%/13),
+        #0000 0 calc(150%/13), var(--c) 0 calc(200%/13),
+        #0000 0 calc(250%/13), var(--c) 0 calc(300%/13);
+    --_g0: repeating-linear-gradient(45deg, var(--_g));
+    --_g1: repeating-linear-gradient(-45deg, var(--_g));
+    background:
+        var(--_g0), var(--_g0) var(--s) var(--s),
+        var(--_g1), var(--_g1) var(--s) var(--s) #fffcf0;
+    background-size: calc(2*var(--s)) calc(2*var(--s));
 }
 
 .right-panel {
@@ -69,35 +98,91 @@
     top: 5%;
     right: 2%;
     display: grid;
-    width: 15%;
+    width: 18%;
     height: 90%;
-    background-color: beige;
     border-width: 0.5em;
-    border-style: ridge;
-    border-radius: 1.5%;
-    border-color: white;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, #fff, #f8eedb);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #482307;
+    display: block;
+    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0;
+    outline: 2px solid transparent;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    text-transform: none;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+    --s: 20px;
+    /* control the size */
+    --c: #ffefe2;
+
+    --_g:
+        #0000 calc(-650%/13) calc(50%/13), var(--c) 0 calc(100%/13),
+        #0000 0 calc(150%/13), var(--c) 0 calc(200%/13),
+        #0000 0 calc(250%/13), var(--c) 0 calc(300%/13);
+    --_g0: repeating-linear-gradient(45deg, var(--_g));
+    --_g1: repeating-linear-gradient(-45deg, var(--_g));
+    background:
+        var(--_g0), var(--_g0) var(--s) var(--s),
+        var(--_g1), var(--_g1) var(--s) var(--s) #fffcf0;
+    background-size: calc(2*var(--s)) calc(2*var(--s));
 }
 
-.desc{
+.desc {
+    position: absolute;
     display: flex;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.5rem;
+    align-content: center;
     align-self: center;
-    justify-content: center;
     align-items: center;
-    height: 75%;
-    width: 50%;
-    margin-top: 2%;
+    top: 5%;
+    height: 53%;
+    width: 55%;
     padding: 5px;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
     text-align: center;
-    background-color: beige;
-    border-top-left-radius: 5%;
-    border-top-right-radius: 5%;
-    border-width: 0.37em;
-    border-style: ridge;
-    
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, #fff, #f8eedb);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #482307;
+    display: block;
+    font-weight: 700;
+    line-height: 24px;
+    outline: 2px solid transparent;
+    text-align: center;
+    text-transform: none;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+    --s: 20px;
+    /* control the size */
+    --c: #ffefe2;
+
+    --_g:
+        #0000 calc(-650%/13) calc(50%/13), var(--c) 0 calc(100%/13),
+        #0000 0 calc(150%/13), var(--c) 0 calc(200%/13),
+        #0000 0 calc(250%/13), var(--c) 0 calc(300%/13);
+    --_g0: repeating-linear-gradient(45deg, var(--_g));
+    --_g1: repeating-linear-gradient(-45deg, var(--_g));
+    background:
+        var(--_g0), var(--_g0) var(--s) var(--s),
+        var(--_g1), var(--_g1) var(--s) var(--s) #fffcf0;
+    background-size: calc(2*var(--s)) calc(2*var(--s));
+
 }
 
 .gradient-overlay {
@@ -114,44 +199,125 @@
 }
 
 .choices {
+    position: absolute;
+    bottom: 5%;
     display: flex;
     flex-direction: column;
-    height: 25%;
-    width: 50%;
+    height: 35%;
+    width: 55%;
     align-self: center;
     align-items: center;
     text-align: left;
     padding-left: 2%;
     padding-right: 2%;
     margin-bottom: 2%;
-    border-bottom-left-radius: 5%;
-    border-bottom-right-radius: 5%;
-    background-color: sienna;
-    border-width: 0.5em;
-    border-style: ridge;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, #fff, #f8eedb);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #482307;
+    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0;
+    outline: 2px solid transparent;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    text-transform: none;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+    --s: 20px;
+    /* control the size */
+    --c: #ffefe2;
+
+    --_g:
+        #0000 calc(-650%/13) calc(50%/13), var(--c) 0 calc(100%/13),
+        #0000 0 calc(150%/13), var(--c) 0 calc(200%/13),
+        #0000 0 calc(250%/13), var(--c) 0 calc(300%/13);
+    --_g0: repeating-linear-gradient(45deg, var(--_g));
+    --_g1: repeating-linear-gradient(-45deg, var(--_g));
+    background:
+        var(--_g0), var(--_g0) var(--s) var(--s),
+        var(--_g1), var(--_g1) var(--s) var(--s) #fffcf0;
+    background-size: calc(2*var(--s)) calc(2*var(--s));
 }
+
 .choice {
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.2rem;
     justify-content: left;
     align-items: left;
-    margin: 0 10px;
+    margin: 1px 10px;
     padding: 10px 20px;
-    background-color: sienna;
-    color: beige;
-    border: none;
+    background-color: rgba(46, 3, 3, 0.75);
+    color: white;
     cursor: pointer;
+    border-radius: 0.5em;
+    width: 100%;
 }
 
 .choice:hover {
     border: 1px solid #333;
-    background-color: rgba(50, 50, 50, 0.1);
+    background-color: rgba(3, 3, 3, 0.75);
 }
 
 .choice:active {
-    transform: translateY(1px);
-    border: 1px solid #333;
+        box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
+        transform: translateY(0.125rem);
+    }
 
+
+h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+    border-radius: 0.5em;
+    margin-bottom: 5px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    width: 100%;
+    background-color: rgba(46, 3, 3, 0.75);
+}
+
+.item {
+    font-family: 'Times New Roman', Times, serif;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: white;
+    border-radius: 0.5em;
+    margin-bottom: 2px;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    width: 100%;
+    background-color: rgba(3, 3, 3, 0.50);
+}
+
+.status {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+    border-radius: 0.5em;
+    margin-bottom: 2px;
+    width: 100%;
+    background-color: rgba(3, 3, 3, 0.50);
+}
+
+.char-stats {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+    border-radius: 0.5em;
+    margin-bottom: 2px;
+    width: 100%;
+    background-color: rgba(3, 3, 3, 0.50);
 }
 
 #health {
@@ -159,7 +325,7 @@
     top: 1.6%;
     left: 0.9%;
     font-size: 200%;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.5); 
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
     color: rgb(206, 28, 28);
     background-color: rgba(0, 0, 0, 0.25);
     padding: 5px 10px;
@@ -182,88 +348,33 @@
     height: 1em;
 }
 
-#Character1 {
-    position: absolute;
-    top: 5%;
-    left: 3%;
-    display: grid;
-    width: 30%;
-    height: 90%;
-    background: linear-gradient(to bottom, beige, white);
-    border-width: 0.5em;
-    border-style: ridge;
-    border-radius: 1.5%;
-    border-color: bisque;
-}
-
-#Character1:hover {
-    border-color: sienna;
-    background: linear-gradient(to bottom, rgb(215, 144, 111), white);
-}
-
-#Character2 {
-    position: absolute;
-    top: 5%;
-    left: 35%;
-    display: grid;
-    width: 30%;
-    height: 90%;
-    background: linear-gradient(to bottom, beige, white);
-    border-width: 0.5em;
-    border-style: ridge;
-    border-radius: 1.5%;
-    border-color: bisque;
-}
-
-#Character2:hover {
-    border-color: sienna;
-    background: linear-gradient(to bottom, rgb(215, 144, 111), white);
-}
-
-#Character3 {
-    position: absolute;
-    top: 5%;
-    right: 3%;
-    display: grid;
-    width: 30%;
-    height: 90%;
-    background: linear-gradient(to bottom, beige, white);
-    border-width: 0.5em;
-    border-style: ridge;
-    border-radius: 1.5%;
-    border-color: bisque;
-}
-
-#Character3:hover {
-    border-color: sienna;
-    background: linear-gradient(to bottom, rgb(215, 144, 111), white);
-}
 
 canvas {
-    position:fixed;
+    position: fixed;
     width: 100%;
     height: 100%;
-    --s: 20px; /* control the size */
-    --c: #e9e1da;
-    
-    --_g: 
-      #0000 calc(-650%/13) calc(50%/13),var(--c) 0 calc(100%/13),
-      #0000 0 calc(150%/13),var(--c) 0 calc(200%/13),
-      #0000 0 calc(250%/13),var(--c) 0 calc(300%/13);
-    --_g0: repeating-linear-gradient( 45deg,var(--_g));
-    --_g1: repeating-linear-gradient(-45deg,var(--_g));
+    --s: 20px;
+    /* control the size */
+    --c: #cfbcab;
+
+    --_g:
+        #0000 calc(-650%/13) calc(50%/13), var(--c) 0 calc(100%/13),
+        #0000 0 calc(150%/13), var(--c) 0 calc(200%/13),
+        #0000 0 calc(250%/13), var(--c) 0 calc(300%/13);
+    --_g0: repeating-linear-gradient(45deg, var(--_g));
+    --_g1: repeating-linear-gradient(-45deg, var(--_g));
     background:
-      var(--_g0),var(--_g0) var(--s) var(--s),
-      var(--_g1),var(--_g1) var(--s) var(--s) #e8e6dc;
+        var(--_g0), var(--_g0) var(--s) var(--s),
+        var(--_g1), var(--_g1) var(--s) var(--s) #c5c1ad;
     background-size: calc(2*var(--s)) calc(2*var(--s));
 }
 
-img {
+.image {
     justify-self: center;
     border-width: 0.5em;
     border-style: ridge;
     border-radius: 1.5%;
-    border-color: bisque;
+    border-color: white;
 }
 
 h1 {
@@ -280,4 +391,233 @@ h3 {
     font-family: "Jersey 25", sans-serif;
     font-size: 1.5em;
     margin: 2em;
+}
+
+
+#Character1 {
+    position: absolute;
+    top: 5%;
+    left: 3%;
+    display: grid;
+    width: 30%;
+    height: 90%;
+}
+
+#Character1:hover {
+    top: 4%;
+    left: 2%;
+    width: 32%;
+    height: 92%;
+    padding: 1.2%;
+}
+
+#Character2 {
+    position: absolute;
+    top: 5%;
+    left: 35%;
+    display: grid;
+    width: 30%;
+    height: 90%;
+}
+
+#Character2:hover {
+    top: 4%;
+    left: 34%;
+    width: 32%;
+    height: 92%;
+    padding: 1.2%;
+}
+
+#Character3 {
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    display: grid;
+    width: 30%;
+    height: 90%;
+}
+
+#Character3:hover {
+    top: 4%;
+    right: 2%;
+    width: 32%;
+    height: 92%;
+    padding: 1.2%;
+}
+
+.CharacterButton {
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    appearance: none;
+    outline: 2px solid transparent;
+    border: 0 solid #e5e7eb;
+    border-radius: .5rem;
+    font-family: inherit;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, #fff, #f8eedb);
+    border-radius: 11px;
+    line-height: 24px;
+    color: #482307;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    touch-action: manipulation;
+    box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+
+    &.start {
+        svg {
+            animation: stroke 1s linear;
+        }
+    }
+
+    .lines {
+        position: absolute;
+        inset: 0;
+        mix-blend-mode: hard-light;
+        pointer-events: none;
+        z-index: 1;
+
+        &>div {
+            position: absolute;
+            inset: 0;
+
+            &:last-child {
+                transform: rotate(180deg);
+            }
+
+            svg {
+                display: block;
+                position: absolute;
+                inset: 0;
+                overflow: visible;
+                fill: none;
+                stroke-width: 2;
+                stroke: #ffe6c9;
+                width: 100%;
+                height: 100%;
+                stroke-dasharray: 2 10;
+                stroke-dashoffset: 14;
+                opacity: 0;
+            }
+
+            svg {
+                &:nth-child(1) {
+                    stroke: #ffe6c9;
+                }
+
+                &:nth-child(2) {
+                    stroke-width: 6px;
+                    filter: blur(20px);
+                }
+
+                &:nth-child(3) {
+                    stroke-width: 5px;
+                    filter: blur(6px);
+                }
+
+                &:nth-child(4) {
+                    stroke-width: 10px;
+                    filter: blur(56px);
+                }
+            }
+        }
+    }
+}
+
+@keyframes stroke {
+
+    30%,
+    55% {
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 4;
+        opacity: 0;
+    }
+}
+
+
+
+.CharacterButton:hover {
+    box-shadow: rgba(119, 46, 12, 0.46) 0 0 0 4px, -6px 8px 10px rgba(68, 4, 47, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+}
+
+.CharacterButton:active {
+    background-color: #f3f4f6;
+    box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
+    transform: translateY(0.125rem);
+}
+
+.CharacterButton:focus {
+    box-shadow: rgba(72, 35, 7, .46) 0 0 0 4px, -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+}
+
+.portrait {
+    border: 4px solid #e5e7eb;
+    border-style: ridge;
+    border-radius: 100%;
+    box-sizing: border-box;
+    color: #482307;
+    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 24px;
+    margin: 0;
+    outline: 2px solid transparent;
+    text-align: center;
+    text-transform: none;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+    --s: 20px;
+    /* control the size */
+    --c: #ffefe2;
+
+    --_g:
+        #0000 calc(-650%/13) calc(50%/13), var(--c) 0 calc(100%/13),
+        #0000 0 calc(150%/13), var(--c) 0 calc(200%/13),
+        #0000 0 calc(250%/13), var(--c) 0 calc(300%/13);
+    --_g0: repeating-linear-gradient(45deg, var(--_g));
+    --_g1: repeating-linear-gradient(-45deg, var(--_g));
+    background:
+        var(--_g0), var(--_g0) var(--s) var(--s),
+        var(--_g1), var(--_g1) var(--s) var(--s) #fffcf0;
+    background-size: calc(2*var(--s)) calc(2*var(--s));
+}
+
+#avatar {
+    align-self: center;
+    text-align: center;
+}
+
+.map {
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    bottom: 10%;
+    right: 6%;
+
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    justify-content: left;
+    align-items: left;
+    background-color: rgba(46, 3, 3, 0.75);
+    color: white;
+    cursor: pointer;
+    border-radius: 0.5em;
+    background-image: url("img/EarlGeier_LOKOSSAREAPER.png");
+}
+
+.map:hover {
+    width: 88%;
+    height: 80%;
+    border: 1px solid #333;
+    background-color: rgba(3, 3, 3, 0.75);
+
+}
+
+.map:active {
+    box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
+    transform: translateY(0.125rem);
 }

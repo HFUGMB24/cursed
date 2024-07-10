@@ -17,22 +17,38 @@
 
 <body>
     <span class="left-panel" id="left-panel">
-        <div class="health" id="health-ui"></div>
-        <div class="stats" id="stats"></div>
-        <div class="status-effect" id="status-effect"></div>
+        <div class="avatar" id="avatar">
+            <img src="img/LuigiCastellani_SCHOLARSTAND_port.png" class="portrait" height="150px">
+        </div>
+        <div class="health" id="health-ui">
+            <h4>Health</h4>
+        </div>
+        <div class="stats" id="stats">
+            <h4>Character Stats</h4>
+        </div>
+        <div class="status-effect" id="status-effect">
+            <h4>Status Effects</h4>
+        </div>
     </span>
+
+
     <div class="desc" id="desc"></div>
-    <div class=""></div>
     <div class="choices" id="choices"></div>
+
+
     <span class="right-panel" id="right-panel">
-        <div class="inventory" id="inventory"></div>
-        <div class="map"></div>
+        <div class="inventory" id="inventory">
+            <h4>Inventory</h4>
+        </div>
     </span>
+
+    <button id="map" class="map">MAP</button>
+
     <canvas width="1920" height="1080" class="background" id="background"></canvas>
     <span id="Character">
-        <button type="button" id="Character1">
+        <button class="CharacterButton" type="button" id="Character1">
             <h1>Wasabi</h1>
-            <img src="https://picsum.photos/200/300" class="image">
+            <img src="img/EarlGeier_LOKOSSAREAPER.png" class="image" height="300px">
             <h2 class="CharStats">
                 Class: Fighter <br>
                 HP: 3 <br>
@@ -43,9 +59,9 @@
                     As a determined young warrior seeking a place to hone his skills, he heard from a wise wanderer by the campfire about a mysterious temple in the desert known as a site of trials and training to attain true strength.
                 </h3>
         </button>
-        <button type="button" id="Character2">
+        <button class="CharacterButton" type="button" id="Character2">
             <h1>Kiri</h1>
-            <img src="https://picsum.photos/200/300" class="image">
+            <img src="img/LuigiCastellani_BOWMAN.png" class="image" height="300px">
             <h2 class="CharStats">
                 Class: Rogue <br>
                 HP: 3 <br>
@@ -56,9 +72,9 @@
                     As a notorious robber seeking wealth, you have sold your stolen treasures on the black market. There, you hear of a legend about a temple in the desert said to hold a great treasure.
                 </h3>
         </button>
-        <button type="button" id="Character3">
+        <button class="CharacterButton" type="button" id="Character3">
             <h1>Hazel</h1>
-            <img src="https://picsum.photos/200/300" class="image">
+            <img src="img/LuigiCastellani_SCHOLARSTAND.png" class="image" height="300px">
             <h2 class="CharStats">
                 Class: Sage <br>
                 HP: 3 <br>
