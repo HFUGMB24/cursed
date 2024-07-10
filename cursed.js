@@ -3,7 +3,7 @@ let Character1 = {
     name: "Wasabi",
     class: "Fighter",
     HP: 3,
-    Str: 12,
+    Str: 13,
     Dex: 10,
     Wis: 8,
     avatar: "EarlGeier_LOKOSSAREAPER_port.png",
@@ -13,7 +13,7 @@ let Character2 = {
     class: "Rogue",
     HP: 3,
     Str: 10,
-    Dex: 12,
+    Dex: 13,
     Wis: 8,
     avatar: "LuigiCastellani_BOWMAN_port.png"
 };
@@ -23,7 +23,7 @@ let Character3 = {
     HP: 3,
     Str: 8,
     Dex: 10,
-    Wis: 12,
+    Wis: 13,
     avatar: "LuigiCastellani_SCHOLARSTAND_port.png",
 };
 let chosenCharacter = [];
@@ -109,7 +109,7 @@ const sceneData = {
                 addItem: "Map"
             },
             {
-                text: "Stay here",
+                text: "Return home.",
                 next: "retry"
             }
         ]
@@ -119,7 +119,24 @@ const sceneData = {
         choices: [
             { text: "To your right you see a small passage between two statues of black cats with golden eyes.", next: "cat_passage" },
             { text: "An enormous door decorated with golden hyroglyphes is right infront of you.", next: "stone_door" },
-            { text: "As you take a closer look you found another way. A hidden door behind a painting of a scarab.", next: "scarab_room" },
+            { text: "To your left you see a rotting wooden door, surrounded by a decorated relief of the nearby river and various wildlife.", next: "scarab_room" },
+            { text: "As you take a closer look you found another way. A hidden door behind a painting of a scarab.", next: "urn_room" },
+        ]
+    },
+    urn_room: {
+        text: "You enter a richly decorated room, with painted walls. You see four colorful jars sitting on an altar in front of you.",
+        choices: [
+            { text: "Take the black jar.", next: "take_jar", addItem: "Black Jar" },
+            { text: " Take the red jar.", next: "take_jar", addItem: "Healing Potion" },
+            { text: "Take the yellow jar.", next: "take_jar", addItem: "Poison Bottle" },
+            { text: "Take the green jar.", next: "take_jar", addItem: "Green Jar" },
+            { text: "Leave the room.", next: "entrance_hall" }
+        ]
+    },
+    take_jar: {
+        text: "As you take the jar small grooves open up beneath the remaining jars. The other jars fall through the opened up holes before the grooves quickly close up again.",
+        choices: [
+            { text: "Leave the room.", next: "entrance_hall" }
         ]
     },
     cat_passage: {
@@ -134,31 +151,49 @@ const sceneData = {
         text: "You find a mysterious scroll. For the last months you studied hyroglyphes and know the effort pays off. The Scroll of Truth explains a short ritual to break the curse. Now you just need to find the treasure, but the door on the other side of the room is locked.",
         choices: [
             { text: "Go back.", next: "entrance_hall" },
-            { text: "Try to lockpick the door.", next: "mummy", requiredDEX: 12 },
-            { text: "Try to breakt the door.", next: "mummy", requiredSTR: 12 },
+            { text: "Try to lockpick the door.", next: "scroll_of_truth_missingReq", requiredDEX: 12, alternateNext: "mummy" },
+            { text: "Try to breakt the door.", next: "scroll_of_truth_missingReq", requiredSTR: 12, alternateNext: "mummy" },
+        ]
+    },
+    scroll_of_truth_missingReq: {
+        text: "You are missing the required attributes.",
+        choices: [
+            { text: "Continue.", next: "scroll_of_truth" }
         ]
     },
     healing_potion_1: {
         text: "You find a small jar with a red shimmering liquid in it. A healing potion. Just in case you get in a fight and get hurt. Now you just need to find the treasure, but the door on the other side of the room is locked.",
         choices: [
             { text: "Go back.", next: "entrance_hall" },
-            { text: "Try to lockpick the door.", next: "mummy", requiredDEX: 12 },
-            { text: "Try to breakt the door.", next: "mummy", requiredSTR: 12 },
+            { text: "[DEX] Try to lockpick the door.", next: "healing_potion_1_missingReq", requiredDEX: 12, alternateNext: "mummy" },
+            { text: "[STR] Try to breakt the door.", next: "healing_potion_1_missingReq", requiredSTR: 12, alternateNext: "mummy" },
+        ]
+    },
+    healing_potion_1_missingReq: {
+        text: "You are missing the required attributes.",
+        choices: [
+            { text: "Continue.", next: "healing_potion_1" }
         ]
     },
     mummy: {
         text: "You enter a room full of sand in which there are three sarcophagi. As you take a closer look you find that one of the sarcophagi is broken. A hand grabs your ankle. As you look down you see a mummy burried in the sand. It seems like it want to tell you something.",
         choices: [
             { text: "Fight the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "Poisoned" },
-            { text: "Kill the mummy.", next: "treasure_way", requiredSTR: 12 },
+            { text: "Kill the mummy.", next: "mummy_missingReq", requiredSTR: 12, alternateNext: "treasure_room" },
             { text: "Talk to the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "Poisoned" },
-            { text: "Convince the mummy to help you.", next: "healing_potion_2", requiredWIS: 12, addItem: "Healing Potion" },
+            { text: "Convince the mummy to help you.", next: "mummy_missingReq", alternateNext: "healing_potion_2", requiredWIS: 12 },
+        ]
+    },
+    mummy_missingReq: {
+        text: "You are missing the required attributes.",
+        choices: [
+            { text: "Continue.", next: "mummy" }
         ]
     },
     healing_potion_2: {
         text: "You find a small jar with a golden shimmering liquid in it. This must be a healing potion.",
         choices: [
-            { text: "Go further.", next: "treasure_room" },
+            { text: "Go further.", next: "treasure_room", addItem: "Healing Potion" },
         ]
     },
     treasure_way_hurt: {
@@ -171,10 +206,16 @@ const sceneData = {
     stone_door: {
         text: "You enter a circular room with a bottomless pit that stretches from wall to wall. Only a narrow ledge leads to the other side where you can see a doorway.",
         choices: [
-            { text: "Stare into the pit and analyze the path.", requiredWIS: 12, next: "traverse" },
+            { text: "Stare into the pit and analyze the path.", next: "stone_door_missingReq", requiredWIS: 12, alternateNext: "traverse" },
             { text: "Stare into the pit.", removeHealth: 2, next: "jump" },
             { text: "Jump into the pit.", removeHealth: 2, next: "jump" },
             { text: "Traverse to the other side.", next: "traverse" },
+        ]
+    },
+    stone_door_missingReq: {
+        text: "You are missing the required attributes.",
+        choices: [
+            { text: "Continue.", next: "stone_door" }
         ]
     },
     traverse: {
@@ -229,9 +270,15 @@ const sceneData = {
     magic_circle: {
         text: "You descend the stairs and see a long corridor. At the end of the corridor is a steel door that opens into a room. In the center of the room is a magic circle, while a mysterious container rests in one corner.",
         choices: [
-            { text: "Try to break open the chest.", requiredSTR: 12, next: "healing_potion_3" },
-            { text: "Try to lockpick the chest.", requiredDEX: 12, next: "healing_potion" },
+            { text: "Try to break open the chest.", next: "magic_circle_missingReq", requiredSTR: 12, alternateNext: "healing_potion_3" },
+            { text: "Try to lockpick the chest.", next: "magic_circle_missingReq", requiredDEX: 12, alternateNext: "healing_potion" },
             { text: "Investigate the circle.", next: "entrance_hall" },
+        ]
+    },
+    magic_circle_missingReq: {
+        text: "You are missing the required attributes.",
+        choices: [
+            { text: "Continue.", next: "magic_circle" }
         ]
     },
     healing_potion_3: {
@@ -281,40 +328,70 @@ const sceneData = {
     treasure_room: {
         text: "You follow the dark hallway. It leads you deeper into the ancient temple. You make your way to the treasure room but find it guarded by a huge monster.",
         choices: [
-            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
+            { text: "Try to sneak past the monster.", next: "treasure_room_missingReq", alternateNext: "treasure", requiredDEX: 12 },
             { text: "Try to talk to the monster.", next: "treasure_hurt_2", removeHealth: 2 },
             { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1 },
+        ]
+    },
+    treasure_room_missingReq: {
+        text: "You are missing the required attributes.",
+        choices: [
+            { text: "Continue.", next: "treasure_room" }
         ]
     },
     treasure_hurt_2: {
         text: "The moment you open your mouth the monster lashes out at you with its claws. A sharp pain rushes through your shoulder.",
         choices: [
-            { text: "Try to sneak past the monster.", next: "cursed_treasure", requiredDEX: 12 },
-            { text: "Take a healing potion.", next: "treasure_room", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Try to sneak past the monster.", next: "treasure_hurt_2_missingReq", alternateNext: "cursed_treasure", requiredDEX: 12 },
+            { text: "Take a healing potion.", next: "treasure_hurt_2_missingReq", alternateNext: "treasure_room", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
             { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1 },
+        ]
+    },
+    treasure_hurt_2_missingReq: {
+        text: "You are missing the required item or attributes.",
+        choices: [
+            { text: "Continue.", next: "treasure_hurt_2" }
         ]
     },
     treasure_hurt_1: {
         text: "The monster lashes out at you with its claws. You duck away and only one of the claws scratches over your arm.",
         choices: [
-            { text: "Try to sneak past the monster.", next: "cursed_treasure", requiredDEX: 12 },
-            { text: "Take a healing potion.", next: "cursed_treasure", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Try to sneak past the monster.", next: "treasure_hurt_1_missingReq", alternateNext: "cursed_treasure", requiredDEX: 12 },
+            { text: "Take a healing potion.", next: "treasure_hurt_1_missingReq", alternateNext: "cursed_treasure", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
             { text: "Continue to fight the monster.", next: "cursed_treasure" },
+        ]
+    },
+    treasure_hurt_1_missingReq: {
+        text: "You are missing the required item or attributes.",
+        choices: [
+            { text: "Continue.", next: "treasure_hurt_1" }
         ]
     },
     cursed_treasure: {
         text: "You look around and see a sharp looking stone laying on the ground. That is the weapon you needed. You let yourself drop to the ground, roll to the side and grab the stone. You aim at the monsters head and throw the stone with all of your strength. The beast collapses with a scream. You enter the last chamber and nearly stumble over a pile of old papyrus scrolls. The floor is covered in gold tokens and on the wall across the room you see a khopesh sword.",
         choices: [
             { text: "Take the treasure.", next: "cursed_end" },
-            { text: "Use the Scroll of Truth to reveal the curse and break it.", requiredItem: "Scroll of Truth", removeItem: "Scroll of Truth", next: "happy_end" },
+            { text: "Use the Scroll of Truth to reveal the curse and break it.", next: "cursed_treasure_missingReq", requiredItem: "Scroll of Truth", removeItem: "Scroll of Truth", alternateNext: "happy_end" },
+        ]
+    },
+    cursed_treasure_missingReq: {
+        text: "You are missing the required item or attributes.",
+        choices: [
+            { text: "Continue.", next: "cursed_treasure" }
         ]
     },
     cursed_end: {
         text: " You don't want to wait any longer. It took you long enough to find this place and you defeated the guardian. The treasure is now yours.",
         choices: [
-            { text: "Take the gold.", requiredDEX: 12, next: "new_guard" },
-            { text: "Take the papyrus scrolls.", requiredWIS: 12, next: "new_guard" },
-            { text: "Take the khopesh sword.", requiredSTR: 12, next: "new_guard" },
+            { text: "Take the gold.", next: "cursed_end_missingReq", requiredDEX: 12, alternateNext: "new_guard" },
+            { text: "Take the papyrus scrolls.", next: "cursed_end_missingReq", requiredWIS: 12, alternateNext: "new_guard" },
+            { text: "Take the khopesh sword.", next: "cursed_end_missingReq", requiredSTR: 12, alternateNext: "new_guard" },
+        ]
+    },
+    cursed_end_missingReq: {
+        text: "You are missing the required attributes.",
+        choices: [
+            { text: "Continue.", next: "cursed_end" }
         ]
     },
     new_guard: {
@@ -326,17 +403,23 @@ const sceneData = {
     happy_end: {
         text: "You take the Scroll you found and start to read the hyroglyphes out loud. Your heart beats faster as a golden glow begins to fill the room. Shimmering symbols appear in the air around you and vanishing in little blue flashes as you continue reading. The moment you reach the end of the text, all the symbols have disappeared and the glow ends. Carefully you pick up the treasure you've been looking for so long. It's easy to find your way out with your good sense of direction. This treasure will change your life for the better.",
         choices: [
-            { text: "Leave the temple.", next: "end" },
+            { text: "Leave the temple.", next: "win" },
         ]
     },
     scarab_room: {
         text: "You enter a hallway with two indentations. Each contains a pedestal. On the left pedestal sits a bronze Cage with a silver scarab trapped inside. On the Right pedestal sits a wooden bowl filled with small amounts of coins and small stone statuettes.",
         choices: [
-            { text: "[WIS] Make a small offering.", next: "scarab_make_offering", requiredWIS: 12, addStatus: "Blessed" },
+            { text: "[WIS] Make a small offering.", next: "scarab_room_missingReq", alternateNext: "scarab_make_offering", requiredWIS: 12, addStatus: "Blessed" },
             { text: "Free the scarab.", next: "scarab_free" },
             { text: "Take the coins.", next: "scarab_take_coin", addItem: "Coins" },
             { text: "Take the stone statuette.", next: "scarab_statuette", addItem: "Stone Statuette" },
             { text: "Continue through the hallway.", next: "beast_room" }
+        ]
+    },
+    scarab_room_missingReq: {
+        text: "You are missing the required attributes.",
+        choices: [
+            { text: "Continue.", next: "scarab_room" }
         ]
     },
     scarab_make_offering: {
@@ -368,9 +451,15 @@ const sceneData = {
     beast_room: {
         text: "You enter a new room and encounter an injured beast. The path is blocked by rubble but you notice a hole in the wall.",
         choices: [
-            { text: "[Healing Potion] Aproach the beast and heal it.", next: "beast_room_help", removeItem: "Healing Potion" },
+            { text: "[Healing Potion] Aproach the beast and heal it.", next: "beast_room_missingReq", alternateNext: "beast_room_help", removeItem: "Healing Potion" },
             { text: "Leave the beast alone and explore the room.", next: "beast_room_artifact", addItem: "Ring of Strength" },
             { text: "Slay the beast.", next: "beast_room_death" },
+        ]
+    },
+    beast_room_missingReq: {
+        text: "You are missing the required items or attributes.",
+        choices: [
+            { text: "Continue.", next: "beast_room" }
         ]
     },
     beast_room_death: {
@@ -395,9 +484,15 @@ const sceneData = {
     beast_room_artifact: {
         text: "You explore the room and find a ruby ring in a pile of broken clay shards.",
         choices: [
-            { text: "[Healing Potion] Aproach the beast and heal it.", next: "beast_room_help", removeItem: "Healing Potion" },
+            { text: "[Healing Potion] Aproach the beast and heal it.", next: "beast_room_a_missingReq", alternateNext: "beast_room_help", requiredItem: "Healing Potion", removeItem: "Healing Potion" },
             { text: "Explore the hole in the wall.", next: "beast_room_hole" },
             { text: "Slay the beast.", next: "beast_room_death" },
+        ]
+    },
+    beast_room_a_missingReq: {
+        text: "You are missing the required items or attributes.",
+        choices: [
+            { text: "Continue.", next: "beast_room_artifact" }
         ]
     },
     beast_room_hole: {
@@ -422,6 +517,12 @@ const sceneData = {
     },
     end: {
         text: "Game over.",
+        choices: [
+            { text: "Try again.", next: "start", reload: true }
+        ]
+    },
+    win: {
+        text: "Thank you for playing.",
         choices: [
             { text: "Restart", next: "start", reload: true }
         ]
