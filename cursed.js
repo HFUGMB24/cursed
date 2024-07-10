@@ -107,7 +107,7 @@ const sceneData = {
         text: "You find yourself in a huge entrance chamber. Faded symbols are engraved on the old stonewalls. Several paths lead from here deeper into the temple. Which one do you wanne choose.",
         choices: [
             { text: "To your right you see a small passage between two statues of black cats with golden eyes.", next: "cat_passage" },
-            { text: "An enormous door decorated with golden hyroglyphes is right infront of you.", next: "pit_room" },
+            { text: "An enormous door decorated with golden hyroglyphes is right infront of you.", next: "stone_door" },
             { text: "As you take a closer look you found another way. A hidden door behind a painting of a scarab.", next: "painting_room" },
         ]
     },
@@ -157,6 +157,116 @@ const sceneData = {
             { text: "Keep running.", next: "treasure_room" },
         ]
     },
+    stone_door: {
+        text: "You enter a circular room with a bottomless pit that stretches from wall to wall. Only a narrow ledge leads to the other side where you can see a doorway.",
+        choices: [
+            { text: "Stare into the pit and analyze the path.", requiredWIS: 12, next: "traverse" },
+            { text: "Stare into the pit.", removeHealth: 2, next: "jump" },
+            { text: "Jump into the pit.", removeHealth: 2, next: "jump" },
+            { text: "Traverse to the other side.", next: "traverse" },
+        ]
+    },
+    traverse: {
+        text: "You enter a room full of dust and old papyrus scrolls. On the other side of the room is a passage that leads deeper into the darkness of the old temple.",
+        choices: [
+            { text: "Look through the scrolls.", addItem: "Scroll of Freedom", next: "Scroll_of_Freedom" },
+            { text: "Go further into the dark passage.", next: "treasure_room" },
+        ]
+    },
+    Scroll_of_Freedom: {
+        text: "You find a mysterious scroll. For the last months you studied hyroglyphes and know the effort pays off. The Scroll of Freedom explains a short ritual to break the curse.",
+        choices: [
+            { text: "Go further into the dark passage.", next: "treasure_room" },
+        ]
+    },
+    jump: {
+        text: "As you fall, you realize that there is a spacious room below you that slowly unfolds before your eyes. Upon hitting the ground with a dull thud, a sharp pain shoots through you, inflicting 2 points of damage.",
+        choices: [
+            { text: "Enter the room.", next: "mysterious_pillar" },
+        ]
+    },
+    mysterious_pillar: {
+        text: "The room is illuminated by magically glowing scarab paintings. In its center there is a mysterious pillar engraved with hyroglyphs. You make your way towards the pillar, when suddenly the only door in this room slams behind you and sand starts flowing into the chamber.",
+        choices: [
+            { text: "Investigate the room.", next: "sand_chamber" },
+            { text: "Examine the mysterious pillar.", next: "pillar_puzzle" },
+        ]
+    },
+    pillar_puzzle: {
+        text: "You examine the pillar with the hyropglyphes and realize that they can be pressed. There are five different symbols. The only question is in which order the hyroplyphes have to be presse?.",
+        choices: [
+            { text: "Eye, Owl, Eagle, Snake, Mouth", next: "wrong_solution" },
+            { text: "Snake, Mouth, Eye, Owl, Eagle", next: "wrong_solution" },
+            { text: "Owl, Eye, Snake, Mouth, Eagle", next: "right_solution" },
+            { text: "Eagle, Snake, Mouth, Eye, Owl", next: "wrong_solution" },
+            { text: "Mouth, Eagle, Owl, Snake, Eye", next: "wrong_solution" },
+            { text: "Investigate the room.", next: "sand_chamber" },
+        ]
+    },
+    wrong_solution: {
+        text: "Slowly, the massive pillar starts descending while sand flows incessantly into the room. The air becomes scarce, you feel time working against you. The sand envelops you gradually, your movements become sluggish, and your breaths shallower, until you ultimately suffocate, and darkness envelops you.",
+        choices: [
+            { text: "Restart", next: "start", reload: true },
+        ]
+    },
+    right_solution: {
+        text: "A creaking sound echoes, the pillar starts descending slowly, and the sand that was flowing stops abruptly. Before your eyes, the pillar transforms into a staircase leading downwards.",
+        choices: [
+            { text: "Go downstairs", next: "magic_circle" },
+        ]
+    },
+    magic_circle: {
+        text: "You descend the stairs and see a long corridor. At the end of the corridor is a steel door that opens into a room. In the center of the room is a magic circle, while a mysterious container rests in one corner.",
+        choices: [
+            { text: "Try to break open the chest.", requiredSTR: 12, next: "healing_potion_3" },
+            { text: "Try to lockpick the chest.", requiredDEX: 12, next: "healing_potion" },
+            { text: "Investigate the circle.", next: "entrance_hall" },
+        ]
+    },
+    healing_potion_3: {
+        text: "You manage to open the chest and find a small vial with a shimmering golden liquid in it. A healing potion.",
+        choices: [
+            { text: "Investigate the circle.", next: "entrance_hall" },
+        ]
+    },
+    sand_chamber: {
+        text: "You search the room and find four vases.",
+        choices: [
+            { text: "Examine the mysterious pillar.", next: "pillar_puzzle" },
+            { text: "Open the first vase.", removeHealth: 1, next: "vase1" },
+            { text: "Open the second vase.", addItem: "Note", next: "vase2" },
+            { text: "Open the third vase.", next: "vase3" },
+            { text: "Open the fourth vase.", removeHealth: 1, next: "vase4" },
+        ]
+    },
+    vase1: {
+        text: "You destroy the first vase. Inside was a poisonous sand snake that poisons you. You lose 1 HP.",
+        choices: [
+            { text: "Continue your investigation", next: "sand_chamber" },
+            { text: "Examine the mysterious pillar.", next: "pillar_puzzle" },
+        ]
+    },
+    vase2: {
+        text: "You shatter the second vase and discover a note within. (Owl, Eye, Snake, Mouth, Eagle).",
+        choices: [
+            { text: "Continue your investigation", next: "sand_chamber" },
+            { text: "Examine the mysterious pillar.", next: "pillar_puzzle" },
+        ]
+    },
+    vase3: {
+        text: "You destroy the third vase, but there is nothing inside.",
+        choices: [
+            { text: "Continue your investigation", next: "sand_chamber" },
+            { text: "Examine the mysterious pillar.", next: "pillar_puzzle" },
+        ]
+    },
+    vase4: {
+        text: "You destroy the fourth vase. In doing so, you accidentally break a container, creating a poisonous gas cloud. You loose 1 HP.",
+        choices: [
+            { text: "Continue your investigation", next: "sand_chamber" },
+            { text: "Examine the mysterious pillar.", next: "pillar_puzzle" },
+        ]
+    },
     treasure_room: {
         text: "You follow the dark hallway. It leads you deeper into the ancient temple. You make your way to the treasure room but find it guarded by a huge monster.",
         choices: [
@@ -203,7 +313,7 @@ const sceneData = {
         ]
     },
     happy_end: {
-        text: "You take the Scroll of Truth and start to read the hyroglyphes out loud. Your heart beats faster as a golden glow begins to fill the room. Shimmering symbols appear in the air around you and vanishing in little blue flashes as you continue reading. The moment you reach the end of the text, all the symbols have disappeared and the glow ends. Carefully you pick up the treasure you've been looking for so long. It's easy to find your way out with your good sense of direction. This treasure will change your life for the better.",
+        text: "You take the Scroll you found and start to read the hyroglyphes out loud. Your heart beats faster as a golden glow begins to fill the room. Shimmering symbols appear in the air around you and vanishing in little blue flashes as you continue reading. The moment you reach the end of the text, all the symbols have disappeared and the glow ends. Carefully you pick up the treasure you've been looking for so long. It's easy to find your way out with your good sense of direction. This treasure will change your life for the better.",
         choices: [
             { text: "Leave the temple.", next: "end" },
         ]
