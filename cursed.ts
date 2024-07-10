@@ -12,7 +12,7 @@ interface Character {
 let Character1 = {
     name: "Wasabi",
     class: "Fighter",
-    HP: 3,
+    HP: 5,
     Str: 13,
     Dex: 10,
     Wis: 8,
@@ -22,7 +22,7 @@ let Character1 = {
 let Character2 = {
     name: "Kiri",
     class: "Rogue",
-    HP: 3,
+    HP: 4,
     Str: 10,
     Dex: 13,
     Wis: 8,
@@ -97,7 +97,7 @@ function updateStats() {
     const charHealth = document.createElement("div");
     charHealth.className = "char-stats";
     charHealth.id = "char-health";
-    charHealth.innerText = "HP: " + chosenCharacter[0].HP + " / 3";
+    charHealth.innerText = "HP: " + chosenCharacter[0].HP + " / " + chosenCharacter[0].HP;
     healthUI.appendChild(charHealth);
 
     const charName = document.createElement("div");
@@ -323,7 +323,7 @@ const sceneData: { [key: string]: Scene; } = {
         text: "You descend the stairs and see a long corridor. At the end of the corridor is a steel door that opens into a room. In the center of the room is a magic circle, while a mysterious container rests in one corner.",
         choices: [
             { text: "Try to break open the chest.", next: "magic_circle_missingReq", requiredSTR: 12, alternateNext: "healing_potion_3" },
-            { text: "Try to lockpick the chest.", next: "magic_circle_missingReq", requiredDEX: 12, alternateNext: "healing_potion" },
+            { text: "Try to lockpick the chest.", next: "magic_circle_missingReq", requiredDEX: 12, alternateNext: "healing_potion_3" },
             { text: "Investigate the circle.", next: "entrance_hall" },
         ]
     },
@@ -408,8 +408,8 @@ const sceneData: { [key: string]: Scene; } = {
     treasure_hurt_1: {
         text: "The monster lashes out at you with its claws. You duck away and only one of the claws scratches over your arm.",
         choices: [
-            { text: "Try to sneak past the monster.", next:"treasure_hurt_1_missingReq", alternateNext: "cursed_treasure", requiredDEX: 12 },
-            { text: "Take a healing potion.", next:"treasure_hurt_1_missingReq", alternateNext: "cursed_treasure", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Try to sneak past the monster.", next: "treasure_hurt_1_missingReq", alternateNext: "cursed_treasure", requiredDEX: 12 },
+            { text: "Take a healing potion.", next: "treasure_hurt_1_missingReq", alternateNext: "cursed_treasure", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
             { text: "Continue to fight the monster.", next: "cursed_treasure" },
         ]
     },
@@ -435,8 +435,8 @@ const sceneData: { [key: string]: Scene; } = {
     cursed_end: {
         text: " You don't want to wait any longer. It took you long enough to find this place and you defeated the guardian. The treasure is now yours.",
         choices: [
-            { text: "Take the gold.", next: "cursed_end_missingReq",requiredDEX: 12, alternateNext: "new_guard" },
-            { text: "Take the papyrus scrolls.",next: "cursed_end_missingReq", requiredWIS: 12, alternateNext: "new_guard" },
+            { text: "Take the gold.", next: "cursed_end_missingReq", requiredDEX: 12, alternateNext: "new_guard" },
+            { text: "Take the papyrus scrolls.", next: "cursed_end_missingReq", requiredWIS: 12, alternateNext: "new_guard" },
             { text: "Take the khopesh sword.", next: "cursed_end_missingReq", requiredSTR: 12, alternateNext: "new_guard" },
         ]
     },
@@ -536,7 +536,7 @@ const sceneData: { [key: string]: Scene; } = {
     beast_room_artifact: {
         text: "You explore the room and find a ruby ring in a pile of broken clay shards.",
         choices: [
-            { text: "[Healing Potion] Aproach the beast and heal it.", next:"beast_room_a_missingReq", alternateNext: "beast_room_help", requiredItem: "Healing Potion", removeItem: "Healing Potion" },
+            { text: "[Healing Potion] Aproach the beast and heal it.", next: "beast_room_a_missingReq", alternateNext: "beast_room_help", requiredItem: "Healing Potion", removeItem: "Healing Potion" },
             { text: "Explore the hole in the wall.", next: "beast_room_hole" },
             { text: "Slay the beast.", next: "beast_room_death" },
         ]
@@ -670,7 +670,7 @@ function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
     let status = new Status;
-    let health = 3;
+    let health = chosenCharacter[0].HP;
     let healthMax = chosenCharacter[0].HP;
 
     function chooseScene() {
@@ -711,41 +711,48 @@ function startScene() {
 
         if (choice.addHealth) {
             health = Math.min(health + choice.addHealth, healthMax);
+            updateHealth();
         }
         if (choice.removeHealth) {
             health = Math.max(health - choice.removeHealth, 0);
+            updateHealth();
         }
-        updateHealth();
 
         if (choice.reload) {
             location.reload();
             return;
         }
 
-        const scene = sceneData[currentScene];
-        scene.choices = scene.choices.filter(c => c !== choice);
+        if (health > 0) {
+            const scene = sceneData[currentScene];
+            scene.choices = scene.choices.filter(c => c !== choice);
 
-        if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < chosenCharacter[0].Dex || choice.requiredSTR && choice.requiredSTR < chosenCharacter[0].Str || choice.requiredWIS && choice.requiredWIS < chosenCharacter[0].Wis) {
-            currentScene = choice.alternateNext!;
-        } else {
-            currentScene = choice.next;
+            if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < chosenCharacter[0].Dex || choice.requiredSTR && choice.requiredSTR < chosenCharacter[0].Str || choice.requiredWIS && choice.requiredWIS < chosenCharacter[0].Wis) {
+                currentScene = choice.alternateNext!;
+            } else {
+                currentScene = choice.next;
+            }
+            chooseScene();
+            console.log(currentScene);
         }
-
-        chooseScene();
     }
 
     function updateHealth() {
         const healthUI = document.getElementById("health-ui")!;
         const charHealth = document.getElementById("char-health")!;
         if (healthUI) {
-            charHealth.innerText = "HP: " + health + " / 3";
+            charHealth.innerText = "HP: " + health + " / " + chosenCharacter[0].HP;
         }
-        if (health <= 0) {
+        if (health < 1) {
             currentScene = "end";
+            console.log(health);
+            console.log(currentScene);
             chooseScene();
+            console.log(currentScene);
         }
     }
     chooseScene();
+    console.log(currentScene);
 }
 
 
