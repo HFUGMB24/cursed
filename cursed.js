@@ -168,7 +168,7 @@ const sceneData = {
     treasure_hurt_2: {
         text: "The moment you open your mouth the monster lashes out at you with its claws. A sharp pain rushes through your shoulder.",
         choices: [
-            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
+            { text: "Try to sneak past the monster.", next: "cursed_treasure", requiredDEX: 12 },
             { text: "Take a healing potion.", next: "treasure_room", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
             { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1 },
         ]
@@ -176,15 +176,36 @@ const sceneData = {
     treasure_hurt_1: {
         text: "The monster lashes out at you with its claws. You duck away and only one of the claws scratches over your arm.",
         choices: [
-            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
-            { text: "Take a healing potion.", next: "treasure", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
-            { text: "Continue to fight the monster.", next: "treasure" },
+            { text: "Try to sneak past the monster.", next: "cursed_treasure", requiredDEX: 12 },
+            { text: "Take a healing potion.", next: "cursed_treasure", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Continue to fight the monster.", next: "cursed_treasure" },
         ]
     },
-    treasure: {
-        text: "You look around and see a sharp looking stone laying on the ground. That is the weapon you needed. You let yourself drop to the ground, roll to the side and grab the stone. You aim at the monsters head and throw the stone with all of your strength. The beast collapses with a scream. You enter the last chamber and nearly stumble over a pile of old papyrus scrolls. The floor is covered",
+    cursed_treasure: {
+        text: "You look around and see a sharp looking stone laying on the ground. That is the weapon you needed. You let yourself drop to the ground, roll to the side and grab the stone. You aim at the monsters head and throw the stone with all of your strength. The beast collapses with a scream. You enter the last chamber and nearly stumble over a pile of old papyrus scrolls. The floor is covered in gold tokens and on the wall across the room you see a khopesh sword.",
         choices: [
-            { text: "Try to sneak past the monster.", next: "end_1" },
+            { text: "Take the treasure.", next: "cursed_end" },
+            { text: "Use the Scroll of Truth to reveal the curse and break it.", requiredItem: "Scroll of Truth", removeItem: "Scroll of Truth", next: "happy_end" },
+        ]
+    },
+    cursed_end: {
+        text: " You don't want to wait any longer. It took you long enough to find this place and you defeated the guardian. The treasure is now yours.",
+        choices: [
+            { text: "Take the gold.", requiredDEX: 12, next: "new_guard" },
+            { text: "Take the papyrus scrolls.", requiredWIS: 12, next: "new_guard" },
+            { text: "Take the khopesh sword.", requiredSTR: 12, next: "new_guard" },
+        ]
+    },
+    new_guard: {
+        text: "Your fingertips touch the treasure you've been looking for so long. A smile sreads across your face as suddenly a strange feeling shakes your body. For a brief moment you loose your orientation. You close you eyes, take a deep breath and open them again. The ground seems further away than usual and you're pretty sure that you didn't have claws before. But you know those golden claws. Now you are the guardian of the treasure.",
+        choices: [
+            { text: "Try again.", next: "retry" },
+        ]
+    },
+    happy_end: {
+        text: "You take the Scroll of Truth and start to read the hyroglyphes out loud. Your heart beats faster as a golden glow begins to fill the room. Shimmering symbols appear in the air around you and vanishing in little blue flashes as you continue reading. The moment you reach the end of the text, all the symbols have disappeared and the glow ends. Carefully you pick up the treasure you've been looking for so long. It's easy to find your way out with your good sense of direction. This treasure will change your life for the better.",
+        choices: [
+            { text: "Go further.", next: "treasure_room" },
         ]
     },
     retry: {
