@@ -266,7 +266,7 @@ const sceneData: { [key: string]: Scene; } = {
     happy_end: {
         text: "You take the Scroll of Truth and start to read the hyroglyphes out loud. Your heart beats faster as a golden glow begins to fill the room. Shimmering symbols appear in the air around you and vanishing in little blue flashes as you continue reading. The moment you reach the end of the text, all the symbols have disappeared and the glow ends. Carefully you pick up the treasure you've been looking for so long. It's easy to find your way out with your good sense of direction. This treasure will change your life for the better.",
         choices: [
-            { text: "Go further.", next: "treasure_room" },
+            { text: "Leave the temple.", next: "end" },
         ]
     },
     retry: {
