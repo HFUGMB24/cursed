@@ -122,7 +122,7 @@ function updateStats() {
 
     const charWis = document.createElement("div");
     charWis.className = "char-stats";
-    charWis.innerText = "Wis: " + chosenCharacter[0].Wis;
+    charWis.innerText = "WIS: " + chosenCharacter[0].Wis;
     leftPanel.appendChild(charWis);
 }
 
@@ -425,7 +425,7 @@ function startScene() {
             charHealth.innerText = "HP: " + health + " / 3";
         }
         if (health <= 0) {
-            currentScene = "retry";
+            currentScene = "end";
             chooseScene();
         }
     }

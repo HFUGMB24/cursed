@@ -28,13 +28,26 @@
     font-style: normal;
 }
 
+.crimson-pro-standard {
+    font-family: "Crimson Pro", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .alegreya-sc-regular {
+    font-family: "Alegreya SC", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Alegreya SC", serif;
     --s: 20px;
     /* control the size */
     --c: #cfbcab;
@@ -140,7 +153,7 @@ body {
 .desc {
     position: absolute;
     display: flex;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Crimson Pro", serif;
     font-size: 1.5rem;
     align-content: center;
     align-self: center;
@@ -216,7 +229,7 @@ body {
     border-radius: .5rem;
     box-sizing: border-box;
     color: #482307;
-    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Crimson Pro", serif;
     font-size: 100%;
     font-weight: 700;
     line-height: 24px;
@@ -247,7 +260,7 @@ body {
 }
 
 .choice {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Crimson Pro", serif;
     font-size: 1.2rem;
     justify-content: left;
     align-items: left;
@@ -272,9 +285,9 @@ body {
 
 
 h4 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Alegreya SC", serif;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: white;
     border-radius: 0.5em;
     margin-bottom: 5px;
@@ -285,7 +298,7 @@ h4 {
 }
 
 .item {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Crimson Pro", serif;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
@@ -299,7 +312,7 @@ h4 {
 }
 
 .status {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Crimson Pro", serif;
     text-align: center;
     font-size: 1rem;
     color: white;
@@ -310,7 +323,7 @@ h4 {
 }
 
 .char-stats {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Crimson Pro", serif;
     text-align: center;
     font-size: 1rem;
     color: white;
@@ -378,17 +391,17 @@ canvas {
 }
 
 h1 {
-    font-family: "Jersey 25", sans-serif;
+    font-family: "Alegreya SC", serif;
     font-size: 3em;
 }
 
 h2 {
-    font-family: "Jersey 25", sans-serif;
+    font-family: "Crimson Pro", serif;
     font-size: 2em;
 }
 
 h3 {
-    font-family: "Jersey 25", sans-serif;
+    font-family: "Crimson Pro", serif;
     font-size: 1.5em;
     margin: 2em;
 }
@@ -408,7 +421,7 @@ h3 {
     left: 2%;
     width: 32%;
     height: 92%;
-    padding: 1.2%;
+    padding: 1.5%;
 }
 
 #Character2 {
@@ -425,7 +438,7 @@ h3 {
     left: 34%;
     width: 32%;
     height: 92%;
-    padding: 1.2%;
+    padding: 1.5%;
 }
 
 #Character3 {
@@ -442,7 +455,7 @@ h3 {
     right: 2%;
     width: 32%;
     height: 92%;
-    padding: 1.2%;
+    padding: 1.5%;
 }
 
 .CharacterButton {
@@ -557,7 +570,6 @@ h3 {
     border-radius: 100%;
     box-sizing: border-box;
     color: #482307;
-    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 100%;
     font-weight: 700;
     line-height: 24px;
