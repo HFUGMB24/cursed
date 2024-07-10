@@ -471,13 +471,13 @@ const sceneData = {
     beast_room_dig_weapon: {
         text: "Your weapon gets damaged in the process of digging through the rubble.",
         choices: [
-            { text: "Use your hands to dig.", next: "cat_room" },
+            { text: "Use your hands to dig.", next: "traverse" },
         ]
     },
     beast_room_dig_hand: {
         text: "You get injured while digging through the rubble. You take 1 damage.",
         choices: [
-            { text: "Use your hands to dig.", next: "cat_room" },
+            { text: "Use your hands to dig.", next: "traverse" },
         ]
     },
     beast_room_artifact: {
@@ -504,7 +504,7 @@ const sceneData = {
     beast_room_help: {
         text: "The beast is thankful for your help and carries you to the hole in the wall.",
         choices: [
-            { text: "Continue.", next: "cat_room" },
+            { text: "Continue.", next: "traverse" },
         ]
     },
     retry: {
