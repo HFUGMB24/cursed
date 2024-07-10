@@ -1,33 +1,3 @@
-.amita-regular {
-    font-family: "Amita", serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.amita-bold {
-    font-family: "Amita", serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.jersey-25-regular {
-    font-family: "Jersey 25", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.jacquard-12-regular {
-    font-family: "Jacquard 12", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.six-caps-regular {
-    font-family: "Six Caps", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
 .crimson-pro-standard {
     font-family: "Crimson Pro", serif;
     font-optical-sizing: auto;
@@ -274,13 +244,12 @@ body {
 }
 
 .choice:hover {
-    border: 1px solid #333;
     background-color: rgba(3, 3, 3, 0.75);
 }
 
 .choice:active {
         box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
-        transform: translateY(0.125rem);
+        transform: translateY(0.075rem);
     }
 
 
@@ -548,8 +517,6 @@ h3 {
     }
 }
 
-
-
 .CharacterButton:hover {
     box-shadow: rgba(119, 46, 12, 0.46) 0 0 0 4px, -6px 8px 10px rgba(68, 4, 47, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
 }
@@ -557,7 +524,7 @@ h3 {
 .CharacterButton:active {
     background-color: #f3f4f6;
     box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
-    transform: translateY(0.125rem);
+    transform: translateY(0.075rem);
 }
 
 .CharacterButton:focus {
