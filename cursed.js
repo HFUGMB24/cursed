@@ -89,31 +89,101 @@ function updateStats() {
 // Scene Data
 const sceneData = {
     start: {
-        text: "You are in a dark forest. You see a path ahead.",
+        text: "In the scorching desert heat, you see the majestic silhouette of the ancient temple. Your heart beats with excitement as you approach the mysterious entrance. The imposing gate invites you to step inside. With trembling hands, you take the step into the dark vestibule of the temple. Somewhere in these chambers lies one of the most precious treasures of the ancient civilization. A cursed treasure.",
         choices: [
             {
-                text: "Take the path",
-                next: "path",
+                text: "Enter the temple.",
+                next: "entrance_hall",
                 addItem: "map"
             },
             {
                 text: "Stay here",
-                next: "stay"
+                next: "retry"
             }
         ]
     },
-    path: {
-        text: "You walk down the path and find a map.",
+    entrance_hall: {
+        text: "You find yourself in a huge entrance chamber. Faded symbols are engraved on the old stonewalls. Several paths lead from here deeper into the temple. Which one do you wanne choose.",
         choices: [
-            { text: "Look at the map", next: "map", addItem: "health potion", removeItem: "map", addStatus: "poisoned" },
-            { text: "Keep walking", next: "deep_forest", addHealth: 1 }
+            { text: "To your right you see a small passage between two statues of black cats with golden eyes.", next: "cat_passage" },
+            { text: "An enormous door decorated with golden hyroglyphes is right infront of you.", next: "pit_room" },
+            { text: "As you take a closer look you found another way. A hidden door behind a painting of a scarab.", next: "painting_room" },
         ]
     },
-    map: {
-        text: "The map shows a hidden treasure.",
+    cat_passage: {
+        text: "Entering the mysterious room through the narrow passage between the majestic cat statues, you are greeted by the scent of old books filling the air. As you look around, you discover a variety of ancient scrolls and books.",
         choices: [
-            { text: "Search for treasure", next: "treasure", removeStatus: "poisoned" },
-            { text: "Ignore the map", next: "deep_forest", removeHealth: 1 }
+            { text: "You can examine one of the papyrus scrolls more closely.", next: "scroll_of_truth", addItem: "Scroll of Truth" },
+            { text: "You can search the shelves for a hidden compartment.", next: "healing_potion_1", addItem: "Healing Potion" },
+            { text: "You can inspect one of the parchment scrolls more closely.", next: "scroll_of_truth", addItem: "Scroll of Truth" },
+        ]
+    },
+    scroll_of_truth: {
+        text: "You find a mysterious scroll. For the last months you studied hyroglyphes and know the effort pays off. The Scroll of Truth explains a short ritual to break the curse. Now you just need to find the treasure, but the door on the other side of the room is locked.",
+        choices: [
+            { text: "Go back.", next: "entrance_hall" },
+            { text: "Try to lockpick the door.", next: "mummy", requiredDEX: 12 },
+            { text: "Try to breakt the door.", next: "mummy", requiredSTR: 12 },
+        ]
+    },
+    healing_potion_1: {
+        text: "You find a small jar with a red shimmering liquid in it. A healing potion. Just in case you get in a fight and get hurt. Now you just need to find the treasure, but the door on the other side of the room is locked.",
+        choices: [
+            { text: "Go back.", next: "entrance_hall" },
+            { text: "Try to lockpick the door.", next: "mummy", requiredDEX: 12 },
+            { text: "Try to breakt the door.", next: "mummy", requiredSTR: 12 },
+        ]
+    },
+    mummy: {
+        text: "You enter a room full of sand in which there are three sarcophagi. As you take a closer look you find that one of the sarcophagi is broken. A hand grabs your ankle. As you look down you see a mummy burried in the sand. It seems like it want to tell you something.",
+        choices: [
+            { text: "Fight the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "poisoned" },
+            { text: "Kill the mummy.", next: "treasure_way", requiredSTR: 12 },
+            { text: "Talk to the mummy.", next: "treasure_way_hurt", removeHealth: 1, addStatus: "poisoned" },
+            { text: "Convince the mummy to help you.", next: "healing_potion_2", requiredWIS: 12, addItem: "Healing Potion" },
+        ]
+    },
+    healing_potion_2: {
+        text: "You find a small jar with a golden shimmering liquid in it. This must be a healing potion.",
+        choices: [
+            { text: "Go further.", next: "treasure_room" },
+        ]
+    },
+    treasure_way_hurt: {
+        text: "The mummy digs it sharp fingernails into your leg. You kick the mummy in the head and try to free yourself. Its grib loosened and you start running. A burning feeling fills your body. You have been poisoned and lose 1 HP.",
+        choices: [
+            { text: "Take a healing potion.", next: "treasure_room", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Keep running.", next: "treasure_room" },
+        ]
+    },
+    treasure_room: {
+        text: "You follow the dark hallway. It leads you deeper into the ancient temple. You make your way to the treasure room but find it guarded by a huge monster.",
+        choices: [
+            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
+            { text: "Try to talk to the monster.", next: "treasure_hurt_2", removeHealth: 2 },
+            { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1 },
+        ]
+    },
+    treasure_hurt_2: {
+        text: "The moment you open your mouth the monster lashes out at you with its claws. A sharp pain rushes through your shoulder.",
+        choices: [
+            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
+            { text: "Take a healing potion.", next: "treasure_room", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1 },
+        ]
+    },
+    treasure_hurt_1: {
+        text: "The monster lashes out at you with its claws. You duck away and only one of the claws scratches over your arm.",
+        choices: [
+            { text: "Try to sneak past the monster.", next: "treasure", requiredDEX: 12 },
+            { text: "Take a healing potion.", next: "treasure", requiredItem: "Healing Potion", removeItem: "Healing Potion", addHealth: 1 },
+            { text: "Continue to fight the monster.", next: "treasure" },
+        ]
+    },
+    treasure: {
+        text: "You look around and see a sharp looking stone laying on the ground. That is the weapon you needed. You let yourself drop to the ground, roll to the side and grab the stone. You aim at the monsters head and throw the stone with all of your strength. The beast collapses with a scream. You enter the last chamber and nearly stumble over a pile of old papyrus scrolls. The floor is covered",
+        choices: [
+            { text: "Try to sneak past the monster.", next: "end_1" },
         ]
     },
     retry: {
