@@ -6,6 +6,7 @@ let Character1 = {
     Str: 12,
     Dex: 10,
     Wis: 8,
+    avatar: "EarlGeier_LOKOSSAREAPER_port.png",
 };
 let Character2 = {
     name: "Kiri",
@@ -14,6 +15,7 @@ let Character2 = {
     Str: 10,
     Dex: 12,
     Wis: 8,
+    avatar: "LuigiCastellani_BOWMAN_port.png"
 };
 let Character3 = {
     name: "Hazel",
@@ -22,6 +24,7 @@ let Character3 = {
     Str: 8,
     Dex: 10,
     Wis: 12,
+    avatar: "LuigiCastellani_SCHOLARSTAND_port.png",
 };
 let chosenCharacter = [];
 function selectCharacter() {
@@ -60,6 +63,14 @@ function selectCharacter() {
 }
 function updateStats() {
     const leftPanel = document.getElementById("stats");
+    const avatar = document.getElementById("avatar");
+    const portrait = document.createElement("img");
+    portrait.className = "portrait";
+    portrait.id = "portrait";
+    portrait.src = "img/";
+    portrait.src += chosenCharacter[0].avatar;
+    portrait.width = 150;
+    avatar.appendChild(portrait);
     const healthUI = document.getElementById("health-ui");
     const charHealth = document.createElement("div");
     charHealth.className = "char-stats";
@@ -84,7 +95,7 @@ function updateStats() {
     leftPanel.appendChild(charDex);
     const charWis = document.createElement("div");
     charWis.className = "char-stats";
-    charWis.innerText = "Wis: " + chosenCharacter[0].Wis;
+    charWis.innerText = "WIS: " + chosenCharacter[0].Wis;
     leftPanel.appendChild(charWis);
 }
 // Scene Data
@@ -356,7 +367,7 @@ function startScene() {
             charHealth.innerText = "HP: " + health + " / 3";
         }
         if (health <= 0) {
-            currentScene = "retry";
+            currentScene = "end";
             chooseScene();
         }
     }

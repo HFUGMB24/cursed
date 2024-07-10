@@ -1,32 +1,15 @@
-.amita-regular {
-    font-family: "Amita", serif;
+.crimson-pro-standard {
+    font-family: "Crimson Pro", serif;
+    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-}
-
-.amita-bold {
-    font-family: "Amita", serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.jersey-25-regular {
-    font-family: "Jersey 25", sans-serif;
+  }
+  
+  .alegreya-sc-regular {
+    font-family: "Alegreya SC", serif;
     font-weight: 400;
     font-style: normal;
-}
-
-.jacquard-12-regular {
-    font-family: "Jacquard 12", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.six-caps-regular {
-    font-family: "Six Caps", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
+  }
 
 body {
     display: flex;
@@ -34,7 +17,7 @@ body {
     justify-content: space-between;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Alegreya SC", serif;
     --s: 20px;
     /* control the size */
     --c: #cfbcab;
@@ -140,7 +123,7 @@ body {
 .desc {
     position: absolute;
     display: flex;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Crimson Pro", serif;
     font-size: 1.5rem;
     align-content: center;
     align-self: center;
@@ -216,7 +199,7 @@ body {
     border-radius: .5rem;
     box-sizing: border-box;
     color: #482307;
-    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "Crimson Pro", serif;
     font-size: 100%;
     font-weight: 700;
     line-height: 24px;
@@ -247,7 +230,7 @@ body {
 }
 
 .choice {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Crimson Pro", serif;
     font-size: 1.2rem;
     justify-content: left;
     align-items: left;
@@ -261,20 +244,19 @@ body {
 }
 
 .choice:hover {
-    border: 1px solid #333;
     background-color: rgba(3, 3, 3, 0.75);
 }
 
 .choice:active {
         box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
-        transform: translateY(0.125rem);
+        transform: translateY(0.075rem);
     }
 
 
 h4 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Alegreya SC", serif;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: white;
     border-radius: 0.5em;
     margin-bottom: 5px;
@@ -285,7 +267,7 @@ h4 {
 }
 
 .item {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Crimson Pro", serif;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
@@ -299,7 +281,7 @@ h4 {
 }
 
 .status {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Crimson Pro", serif;
     text-align: center;
     font-size: 1rem;
     color: white;
@@ -310,7 +292,7 @@ h4 {
 }
 
 .char-stats {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Crimson Pro", serif;
     text-align: center;
     font-size: 1rem;
     color: white;
@@ -378,17 +360,17 @@ canvas {
 }
 
 h1 {
-    font-family: "Jersey 25", sans-serif;
+    font-family: "Alegreya SC", serif;
     font-size: 3em;
 }
 
 h2 {
-    font-family: "Jersey 25", sans-serif;
+    font-family: "Crimson Pro", serif;
     font-size: 2em;
 }
 
 h3 {
-    font-family: "Jersey 25", sans-serif;
+    font-family: "Crimson Pro", serif;
     font-size: 1.5em;
     margin: 2em;
 }
@@ -408,7 +390,7 @@ h3 {
     left: 2%;
     width: 32%;
     height: 92%;
-    padding: 1.2%;
+    padding: 1.5%;
 }
 
 #Character2 {
@@ -425,7 +407,7 @@ h3 {
     left: 34%;
     width: 32%;
     height: 92%;
-    padding: 1.2%;
+    padding: 1.5%;
 }
 
 #Character3 {
@@ -442,7 +424,7 @@ h3 {
     right: 2%;
     width: 32%;
     height: 92%;
-    padding: 1.2%;
+    padding: 1.5%;
 }
 
 .CharacterButton {
@@ -535,8 +517,6 @@ h3 {
     }
 }
 
-
-
 .CharacterButton:hover {
     box-shadow: rgba(119, 46, 12, 0.46) 0 0 0 4px, -6px 8px 10px rgba(68, 4, 47, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
 }
@@ -544,7 +524,7 @@ h3 {
 .CharacterButton:active {
     background-color: #f3f4f6;
     box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
-    transform: translateY(0.125rem);
+    transform: translateY(0.075rem);
 }
 
 .CharacterButton:focus {
@@ -557,7 +537,6 @@ h3 {
     border-radius: 100%;
     box-sizing: border-box;
     color: #482307;
-    font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 100%;
     font-weight: 700;
     line-height: 24px;
@@ -620,4 +599,6 @@ h3 {
 .map:active {
     box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15), 0px 1px 1px rgba(81, 41, 10, 0.15);
     transform: translateY(0.125rem);
+    width: 10%;
+    height: 10%;
 }

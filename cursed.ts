@@ -1,12 +1,12 @@
 // Choose Character
-interface Character
-{
+interface Character {
     name: string,
     class: string,
     HP: number,
     Str: number,
     Dex: number,
     Wis: number,
+    avatar: string,
 }
 
 let Character1 = {
@@ -16,6 +16,7 @@ let Character1 = {
     Str: 12,
     Dex: 10,
     Wis: 8,
+    avatar: "EarlGeier_LOKOSSAREAPER_port.png",
 };
 
 let Character2 = {
@@ -25,6 +26,7 @@ let Character2 = {
     Str: 10,
     Dex: 12,
     Wis: 8,
+    avatar: "LuigiCastellani_BOWMAN_port.png"
 };
 
 let Character3 = {
@@ -34,19 +36,18 @@ let Character3 = {
     Str: 8,
     Dex: 10,
     Wis: 12,
+    avatar: "LuigiCastellani_SCHOLARSTAND_port.png",
 };
 
 let chosenCharacter: Character[] = [];
 
-function selectCharacter()
-{
+function selectCharacter() {
     let button1 = <HTMLElement>document.getElementById('Character1');
     let button2 = <HTMLElement>document.getElementById('Character2');
     let button3 = <HTMLElement>document.getElementById('Character3');
     let background = document.getElementById("background")!;
 
-    button1.addEventListener('click', function handleClick(_event)
-    {
+    button1.addEventListener('click', function handleClick(_event) {
         chosenCharacter.push(Character1);
         console.log(chosenCharacter[0]);
         const element = <HTMLElement>document.getElementById("Character");
@@ -57,38 +58,41 @@ function selectCharacter()
         element.remove();
     });
 
-    button2.addEventListener('click', function handleClick(_event)
-    {
+    button2.addEventListener('click', function handleClick(_event) {
         console.log(chosenCharacter);
         chosenCharacter.push(Character2);
         const element = <HTMLElement>document.getElementById("Character");
         startScene();
         updateStats();
-
         background.remove();
-
         element.remove();
     });
 
-    button3.addEventListener('click', function handleClick(_event)
-    {
+    button3.addEventListener('click', function handleClick(_event) {
         console.log(chosenCharacter);
         chosenCharacter.push(Character3);
         const element = <HTMLElement>document.getElementById("Character");
         startScene();
         updateStats();
-
         background.remove();
-
         element.remove();
     });
 
 
 }
 
-function updateStats()
-{
+function updateStats() {
     const leftPanel = document.getElementById("stats")!;
+
+    const avatar: HTMLElement = <HTMLElement>document.getElementById("avatar")!;
+    const portrait: HTMLImageElement = <HTMLImageElement>document.createElement("img");
+    portrait.className = "portrait";
+    portrait.id ="portrait";
+    portrait.src = "img/";
+    portrait.src += chosenCharacter[0].avatar;
+    portrait.width = 150;
+    avatar.appendChild(portrait);
+
     const healthUI = document.getElementById("health-ui")!;
     const charHealth = document.createElement("div");
     charHealth.className = "char-stats";
@@ -118,20 +122,18 @@ function updateStats()
 
     const charWis = document.createElement("div");
     charWis.className = "char-stats";
-    charWis.innerText = "Wis: " + chosenCharacter[0].Wis;
+    charWis.innerText = "WIS: " + chosenCharacter[0].Wis;
     leftPanel.appendChild(charWis);
 }
 
 
 // Scene Interface
-interface Scene
-{
+interface Scene {
     text: string;
     choices: Choice[];
 }
 
-interface Choice
-{
+interface Choice {
     text: string;
     next: string;
     addItem?: string;
@@ -285,46 +287,37 @@ const sceneData: { [key: string]: Scene; } = {
 };
 
 // Inventory
-interface Item
-{
+interface Item {
     name: string;
 }
 
-class Inventory
-{
+class Inventory {
     public items: Item[] = [];
 
-    addItem(name: string): void
-    {
+    addItem(name: string): void {
         this.items.push({
             name,
         });
         this.updateItems();
     }
 
-    removeItem(name: string): void
-    {
+    removeItem(name: string): void {
         this.items = this.items.filter(item => item.name !== name);
         this.updateItems();
     }
 
-    hasItem(name: string): boolean
-    {
+    hasItem(name: string): boolean {
         return this.items.some(item => item.name === name);
     }
 
-    updateItems()
-    {
+    updateItems() {
         var elements = document.getElementsByClassName("item");
-        while (elements.length > 0)
-        {
-            if (elements[0].parentNode != null)
-            {
+        while (elements.length > 0) {
+            if (elements[0].parentNode != null) {
                 elements[0].parentNode.removeChild(elements[0]);
             }
         }
-        for (let i: number = 0; i < this.items.length; i++)
-        {
+        for (let i: number = 0; i < this.items.length; i++) {
             const itemUI = document.createElement("div");
             const rightPanel = document.getElementById("inventory")!;
             itemUI.className = "item";
@@ -336,46 +329,37 @@ class Inventory
 }
 
 // Status
-interface StatusData
-{
+interface StatusData {
     name: string;
 }
 
-class Status
-{
+class Status {
     public status: StatusData[] = [];
 
-    addStatus(name: string): void
-    {
+    addStatus(name: string): void {
         this.status.push({
             name,
         });
         this.updateStatus();
     }
 
-    removeStatus(name: string): void
-    {
+    removeStatus(name: string): void {
         this.status = this.status.filter(status => status.name !== name);
         this.updateStatus();
     }
 
-    hasStatus(name: string): boolean
-    {
+    hasStatus(name: string): boolean {
         return this.status.some(status => status.name === name);
     }
 
-    updateStatus()
-    {
+    updateStatus() {
         var elements = document.getElementsByClassName("status");
-        while (elements.length > 0)
-        {
-            if (elements[0].parentNode != null)
-            {
+        while (elements.length > 0) {
+            if (elements[0].parentNode != null) {
                 elements[0].parentNode.removeChild(elements[0]);
             }
         }
-        for (let i: number = 0; i < this.status.length; i++)
-        {
+        for (let i: number = 0; i < this.status.length; i++) {
             const statusUI = document.createElement("div");
             const leftPanel = document.getElementById("status-effect")!;
             statusUI.className = "status";
@@ -387,30 +371,25 @@ class Status
 }
 
 // Scene Manager
-function startScene()
-{
+function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
     let status = new Status;
     let health = 3;
     let healthMax = chosenCharacter[0].HP;
 
-    function chooseScene()
-    {
+    function chooseScene() {
         const scene = sceneData[currentScene];
         const textContainer = document.getElementById("desc");
         const choicesContainer = document.getElementById("choices");
 
-        if (textContainer)
-        {
+        if (textContainer) {
             textContainer.innerHTML = `<p>${scene.text}</p>`;
         }
 
-        if (choicesContainer)
-        {
+        if (choicesContainer) {
             choicesContainer.innerHTML = "";
-            scene.choices.forEach(choice =>
-            {
+            scene.choices.forEach(choice => {
                 const button = document.createElement("button");
                 button.className = "choice";
                 button.innerText = choice.text;
@@ -420,38 +399,30 @@ function startScene()
         }
     }
 
-    function handleChoice(choice: Choice)
-    {
-        if (choice.addItem)
-        {
+    function handleChoice(choice: Choice) {
+        if (choice.addItem) {
             inventory.addItem(choice.addItem);
         }
-        if (choice.removeItem)
-        {
+        if (choice.removeItem) {
             inventory.removeItem(choice.removeItem);
         }
 
-        if (choice.addStatus)
-        {
+        if (choice.addStatus) {
             status.addStatus(choice.addStatus);
         }
-        if (choice.removeStatus)
-        {
+        if (choice.removeStatus) {
             status.removeStatus(choice.removeStatus);
         }
 
-        if (choice.addHealth)
-        {
+        if (choice.addHealth) {
             health = Math.min(health + choice.addHealth, healthMax);
         }
-        if (choice.removeHealth)
-        {
+        if (choice.removeHealth) {
             health = Math.max(health - choice.removeHealth, 0);
         }
         updateHealth();
 
-        if (choice.reload)
-        {
+        if (choice.reload) {
             location.reload();
             return;
         }
@@ -459,28 +430,23 @@ function startScene()
         const scene = sceneData[currentScene];
         scene.choices = scene.choices.filter(c => c !== choice);
 
-        if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < chosenCharacter[0].Dex || choice.requiredSTR && choice.requiredSTR < chosenCharacter[0].Str || choice.requiredWIS && choice.requiredWIS < chosenCharacter[0].Wis)
-        {
+        if (choice.requiredItem && inventory.hasItem(choice.requiredItem) || choice.requiredDEX && choice.requiredDEX < chosenCharacter[0].Dex || choice.requiredSTR && choice.requiredSTR < chosenCharacter[0].Str || choice.requiredWIS && choice.requiredWIS < chosenCharacter[0].Wis) {
             currentScene = choice.alternateNext!;
-        } else
-        {
+        } else {
             currentScene = choice.next;
         }
 
         chooseScene();
     }
 
-    function updateHealth()
-    {
+    function updateHealth() {
         const healthUI = document.getElementById("health-ui")!;
         const charHealth = document.getElementById("char-health")!;
-        if (healthUI)
-        {
+        if (healthUI) {
             charHealth.innerText = "HP: " + health + " / 3";
         }
-        if (health <= 0)
-        {
-            currentScene = "retry";
+        if (health <= 0) {
+            currentScene = "end";
             chooseScene();
         }
     }
@@ -489,8 +455,7 @@ function startScene()
 
 
 // Start on Load
-document.addEventListener("DOMContentLoaded", () =>
-{
+document.addEventListener("DOMContentLoaded", () => {
     selectCharacter();
 });
 
@@ -511,8 +476,7 @@ document.addEventListener("DOMContentLoaded", () =>
 
 
 // IGNORE THIS!! Fancy Suff for Buttons
-const createSVG = (width: any, height: any, radius: any) =>
-{
+const createSVG = (width: any, height: any, radius: any) => {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
     const rectangle = document.createElementNS(
@@ -539,8 +503,7 @@ const createSVG = (width: any, height: any, radius: any) =>
     return svg;
 };
 
-document.querySelectorAll(".CharacterButton").forEach((button) =>
-{
+document.querySelectorAll(".CharacterButton").forEach((button) => {
     const htmlButton = button as HTMLElement;
     const style = getComputedStyle(htmlButton);
 
@@ -572,13 +535,11 @@ document.querySelectorAll(".CharacterButton").forEach((button) =>
 
     button.appendChild(lines);
 
-    button.addEventListener("pointerenter", () =>
-    {
+    button.addEventListener("pointerenter", () => {
         button.classList.add("start");
     });
 
-    svg.addEventListener("animationend", () =>
-    {
+    svg.addEventListener("animationend", () => {
         button.classList.remove("start");
     });
 });
