@@ -376,7 +376,7 @@ const sceneData: { [key: string]: Scene; } = {
             { text: "Examine the mysterious pillar.", next: "pillar_puzzle" },
         ]
     },
-    treasure_room: {
+    treasure_room: { //end
         text: "You follow the dark hallway. It leads you deeper into the ancient temple. You make your way to the treasure room but find it guarded by a huge monster.",
         choices: [
             { text: "[DEX] Try to sneak past the monster.", next: "treasure_room_missingReq", alternateNext: "cursed_treasure", requiredDEX: 12 },
@@ -384,13 +384,13 @@ const sceneData: { [key: string]: Scene; } = {
             { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1 },
         ]
     },
-    treasure_room_missingReq: {
+    treasure_room_missingReq: { //end
         text: "You are missing the required attributes.",
         choices: [
             { text: "Continue.", next: "treasure_room" }
         ]
     },
-    treasure_hurt_2: {
+    treasure_hurt_2: { //end
         text: "The moment you open your mouth the monster lashes out at you with its claws. A sharp pain rushes through your shoulder.",
         choices: [
             { text: "[DEX] Try to sneak past the monster.", next: "treasure_hurt_2_missingReq", alternateNext: "cursed_treasure", requiredDEX: 12 },
@@ -398,13 +398,13 @@ const sceneData: { [key: string]: Scene; } = {
             { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1 },
         ]
     },
-    treasure_hurt_2_missingReq: {
+    treasure_hurt_2_missingReq: { //end
         text: "You are missing the required item or attributes.",
         choices: [
             { text: "Continue.", next: "treasure_hurt_2" }
         ]
     },
-    treasure_hurt_1: {
+    treasure_hurt_1: { //end
         text: "The monster lashes out at you with its claws. You duck away and only one of the claws scratches over your arm.",
         choices: [
             { text: "[Dex] Try to sneak past the monster.", next: "treasure_hurt_1_missingReq", alternateNext: "cursed_treasure", requiredDEX: 12 },
@@ -412,26 +412,27 @@ const sceneData: { [key: string]: Scene; } = {
             { text: "Continue to fight the monster.", next: "cursed_treasure" },
         ]
     },
-    treasure_hurt_1_missingReq: {
+    treasure_hurt_1_missingReq: { //end
         text: "You are missing the required item or attributes.",
         choices: [
             { text: "Continue.", next: "treasure_hurt_1" }
         ]
     },
-    cursed_treasure: {
+    cursed_treasure: { //end
         text: "You look around and see a sharp looking stone laying on the ground. That is the weapon you needed. You let yourself drop to the ground, roll to the side and grab the stone. You aim at the monsters head and throw the stone with all of your strength. The beast collapses with a scream. You enter the last chamber and nearly stumble over a pile of old papyrus scrolls. The floor is covered in gold tokens and on the wall across the room you see a khopesh sword.",
         choices: [
             { text: "Take the treasure.", next: "cursed_end" },
             { text: "[Scroll of Truth] Use the Scroll of Truth to reveal the curse and break it.", next: "cursed_treasure_missingReq", requiredItem: "Scroll of Truth", removeItem: "Scroll of Truth", alternateNext: "happy_end" },
+            { text: "[Scroll of Freedom] Use the Scroll of Freedom to reveal the curse and break it.", next: "cursed_treasure_missingReq", requiredItem: "Scroll of Freedom", removeItem: "Scroll of Freedom", alternateNext: "happy_end" },
         ]
     },
-    cursed_treasure_missingReq: {
+    cursed_treasure_missingReq: { //end
         text: "You are missing the required item or attributes.",
         choices: [
             { text: "Continue.", next: "cursed_treasure" }
         ]
     },
-    cursed_end: {
+    cursed_end: { //end
         text: " You don't want to wait any longer. It took you long enough to find this place and you defeated the guardian. The treasure is now yours.",
         choices: [
             { text: "[DEX] Take the gold.", next: "cursed_end_missingReq", requiredDEX: 12, alternateNext: "new_guard" },
@@ -439,19 +440,19 @@ const sceneData: { [key: string]: Scene; } = {
             { text: "[STR] Take the khopesh sword.", next: "cursed_end_missingReq", requiredSTR: 12, alternateNext: "new_guard" },
         ]
     },
-    cursed_end_missingReq: {
+    cursed_end_missingReq: { //end
         text: "You are missing the required attributes.",
         choices: [
             { text: "Continue.", next: "cursed_end" }
         ]
     },
-    new_guard: {
+    new_guard: { //end
         text: "Your fingertips touch the treasure you've been looking for so long. A smile sreads across your face as suddenly a strange feeling shakes your body. For a brief moment you loose your orientation. You close you eyes, take a deep breath and open them again. The ground seems further away than usual and you're pretty sure that you didn't have claws before. But you know those golden claws. Now you are the guardian of the treasure.",
         choices: [
             { text: "Try again.", next: "retry" },
         ]
     },
-    happy_end: {
+    happy_end: { //end
         text: "You take the Scroll you found and start to read the hyroglyphes out loud. Your heart beats faster as a golden glow begins to fill the room. Shimmering symbols appear in the air around you and vanishing in little blue flashes as you continue reading. The moment you reach the end of the text, all the symbols have disappeared and the glow ends. Carefully you pick up the treasure you've been looking for so long. It's easy to find your way out with your good sense of direction. This treasure will change your life for the better.",
         choices: [
             { text: "Leave the temple.", next: "win" },
