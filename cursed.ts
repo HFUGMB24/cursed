@@ -379,7 +379,7 @@ const sceneData: { [key: string]: Scene; } = {
     treasure_room: {
         text: "You follow the dark hallway. It leads you deeper into the ancient temple. You make your way to the treasure room but find it guarded by a huge monster.",
         choices: [
-            { text: "[DEX] Try to sneak past the monster.", next: "treasure_room_missingReq", alternateNext: "treasure", requiredDEX: 12 },
+            { text: "[DEX] Try to sneak past the monster.", next: "treasure_room_missingReq", alternateNext: "cursed_treasure", requiredDEX: 12 },
             { text: "Try to talk to the monster.", next: "treasure_hurt_2", removeHealth: 2 },
             { text: "Fight the monster.", next: "treasure_hurt_1", removeHealth: 1 },
         ]
