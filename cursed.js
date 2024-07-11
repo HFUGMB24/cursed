@@ -376,6 +376,7 @@ const sceneData = {
         choices: [
             { text: "Take the treasure.", next: "cursed_end" },
             { text: "[Scroll of Truth] Use the Scroll of Truth to reveal the curse and break it.", next: "cursed_treasure_missingReq", requiredItem: "Scroll of Truth", removeItem: "Scroll of Truth", alternateNext: "happy_end" },
+            { text: "[Scroll of Freedom] Use the Scroll of Freedom to reveal the curse and break it.", next: "cursed_treasure_missingReq", requiredItem: "Scroll of Freedom", removeItem: "Scroll of Freedom", alternateNext: "happy_end" },
         ]
     },
     cursed_treasure_missingReq: {
@@ -547,7 +548,7 @@ class Inventory {
         this.updateItems();
     }
     hasItem(name) {
-        return this.items.some(item => item.name === name);
+        return this.items.some(item => item.name == name);
     }
     updateItems() {
         var elements = document.getElementsByClassName("item");
@@ -631,9 +632,6 @@ function startScene() {
         if (choice.addItem) {
             inventory.addItem(choice.addItem);
         }
-        if (choice.removeItem) {
-            inventory.removeItem(choice.removeItem);
-        }
         if (choice.addStatus) {
             status.addStatus(choice.addStatus);
         }
@@ -663,6 +661,9 @@ function startScene() {
             }
             chooseScene();
             console.log(currentScene);
+        }
+        if (choice.removeItem) {
+            inventory.removeItem(choice.removeItem);
         }
     }
     function updateHealth() {

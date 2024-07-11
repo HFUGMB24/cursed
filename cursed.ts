@@ -526,7 +526,7 @@ const sceneData: { [key: string]: Scene; } = {
         text: "The beast dies painfully screaming and rolling around. You can't reach the hole in the wall and have to dig through the rubble.",
         choices: [
             { text: "Use your weapon to dig.", next: "beast_room_dig_weapon", addStatus: "Broken Weapon" },
-            { text: "Use your hands to dig.", next: "beast_room_dig_hand", removeHealth: 1},
+            { text: "Use your hands to dig.", next: "beast_room_dig_hand", removeHealth: 1 },
         ]
     },
     beast_room_dig_weapon: {
@@ -559,7 +559,7 @@ const sceneData: { [key: string]: Scene; } = {
         text: "You sneak past the beast. You can't reach the hole in the wall and have to dig through the rubble.",
         choices: [
             { text: "Use your weapon to dig.", next: "beast_room_dig_weapon", addStatus: "Broken Weapon" },
-            { text: "Use your hands to dig.", next: "beast_room_dig_hand", removeHealth: 1},
+            { text: "Use your hands to dig.", next: "beast_room_dig_hand", removeHealth: 1 },
         ]
     },
     beast_room_help: {
@@ -612,7 +612,7 @@ class Inventory {
     }
 
     hasItem(name: string): boolean {
-        return this.items.some(item => item.name === name);
+        return this.items.some(item => item.name == name);
     }
 
     updateItems() {
@@ -712,9 +712,6 @@ function startScene() {
         if (choice.addItem) {
             inventory.addItem(choice.addItem);
         }
-        if (choice.removeItem) {
-            inventory.removeItem(choice.removeItem);
-        }
 
         if (choice.addStatus) {
             status.addStatus(choice.addStatus);
@@ -749,6 +746,10 @@ function startScene() {
             chooseScene();
             console.log(currentScene);
         }
+        
+        if (choice.removeItem) {
+            inventory.removeItem(choice.removeItem);
+        } 
     }
 
     function updateHealth() {
