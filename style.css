@@ -574,12 +574,12 @@ h3 {
     color: white;
     cursor: pointer;
     border-radius: 0.5em;
-    background-image: url("img/1569261755Watercolor-painting-Encapsulated-PostScript-watercolor-brush-transparent-background-PNG.png");
+    background-image: url("img/map.png");
 }
 
 .map:hover {
-    width: 88%;
-    height: 80%;
+    width: 880px;
+    height: 650px;
     border: 1px solid #333;
     background-color: rgba(3, 3, 3, 0.75);
 
