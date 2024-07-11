@@ -27,6 +27,9 @@ let Character3 = {
     avatar: "maxi_final_no_backround_p.png",
 };
 let chosenCharacter = [];
+// ==========================================================================
+// Character Selection
+// ==========================================================================
 function selectCharacter() {
     let button1 = document.getElementById('Character1');
     let button2 = document.getElementById('Character2');
@@ -97,7 +100,9 @@ function updateStats() {
     charWis.innerText = "WIS: " + chosenCharacter[0].Wis;
     leftPanel.appendChild(charWis);
 }
+// ==========================================================================
 // Scene Data
+// ==========================================================================
 const sceneData = {
     start: {
         text: "In the scorching desert heat, you see the majestic silhouette of the ancient temple. Your heart beats with excitement as you approach the mysterious entrance. The imposing gate invites you to step inside. With trembling hands, you take the step into the dark vestibule of the temple. Somewhere in these chambers lies one of the most precious treasures of the ancient civilization. A cursed treasure.",
@@ -595,7 +600,9 @@ class Status {
         }
     }
 }
+// ==========================================================================
 // Scene Manager
+// ==========================================================================
 function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
@@ -675,10 +682,13 @@ function startScene() {
     chooseScene();
     console.log(currentScene);
 }
+// ==========================================================================
 // Start on Load
+// ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     selectCharacter();
 });
+// ==========================================================================
 // IGNORE THIS!! 
 // IGNORE THIS!!
 // IGNORE THIS!! 
@@ -690,6 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // IGNORE THIS!! 
 // IGNORE THIS!! 
 // IGNORE THIS!! 
+// ==========================================================================
 const createSVG = (width, height, radius) => {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const rectangle = document.createElementNS("http://www.w3.org/2000/svg", "rect");

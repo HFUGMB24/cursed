@@ -1,4 +1,6 @@
-// Choose Character
+// ==========================================================================
+// Character Data
+// ==========================================================================
 interface Character {
     name: string,
     class: string,
@@ -41,6 +43,9 @@ let Character3 = {
 
 let chosenCharacter: Character[] = [];
 
+// ==========================================================================
+// Character Selection
+// ==========================================================================
 function selectCharacter() {
     let button1 = <HTMLElement>document.getElementById('Character1');
     let button2 = <HTMLElement>document.getElementById('Character2');
@@ -125,8 +130,9 @@ function updateStats() {
     leftPanel.appendChild(charWis);
 }
 
-
+// ==========================================================================
 // Scene Interface
+// ==========================================================================
 interface Scene {
     text: string;
     choices: Choice[];
@@ -149,7 +155,9 @@ interface Choice {
     requiredWIS?: number;
 }
 
+// ==========================================================================
 // Scene Data
+// ==========================================================================
 const sceneData: { [key: string]: Scene; } = {
     start: {
         text: "In the scorching desert heat, you see the majestic silhouette of the ancient temple. Your heart beats with excitement as you approach the mysterious entrance. The imposing gate invites you to step inside. With trembling hands, you take the step into the dark vestibule of the temple. Somewhere in these chambers lies one of the most precious treasures of the ancient civilization. A cursed treasure.",
@@ -580,7 +588,9 @@ const sceneData: { [key: string]: Scene; } = {
     }
 };
 
+// ==========================================================================
 // Inventory
+// ==========================================================================
 interface Item {
     name: string;
 }
@@ -622,7 +632,9 @@ class Inventory {
     }
 }
 
-// Status
+// ==========================================================================
+// Status Effects
+// ==========================================================================
 interface StatusData {
     name: string;
 }
@@ -664,7 +676,9 @@ class Status {
     }
 }
 
+// ==========================================================================
 // Scene Manager
+// ==========================================================================
 function startScene() {
     let currentScene = "start";
     let inventory = new Inventory;
@@ -754,12 +768,14 @@ function startScene() {
     console.log(currentScene);
 }
 
-
+// ==========================================================================
 // Start on Load
+// ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     selectCharacter();
 });
 
+// ==========================================================================
 // IGNORE THIS!! 
 // IGNORE THIS!!
 // IGNORE THIS!! 
@@ -771,6 +787,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // IGNORE THIS!! 
 // IGNORE THIS!! 
 // IGNORE THIS!! 
+// ==========================================================================
 const createSVG = (width: any, height: any, radius: any) => {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
