@@ -652,10 +652,11 @@ h3 {
 }
 
 #menu-title {
-    font-family: system-ui, sans-serif;
-    font-size: 2em;
+    font-family: "Alegreya SC", serif;
+    font-size: 2.5em;
     text-align: center;
     margin-top: 10%;
+    line-height: 1em;
 }
 
 #title-container {
