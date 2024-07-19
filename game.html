@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cursed Temple</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="cursed.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Six+Caps&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <span class="left-panel" id="left-panel">
+        <div class="avatar" id="avatar">
+        </div>
+        <div class="health" id="health-ui">
+            <h4>Health</h4>
+        </div>
+        <div class="stats" id="stats">
+            <h4>Character Stats</h4>
+        </div>
+        <div class="status-effect" id="status-effect">
+            <h4>Status Effects</h4>
+        </div>
+    </span>
+
+
+    <div class="desc" id="desc"></div>
+    <div class="choices" id="choices"></div>
+
+
+    <span class="right-panel" id="right-panel">
+        <div class="inventory" id="inventory">
+            <h4>Inventory</h4>
+        </div>
+    </span>
+
+    <button id="map" class="map">MAP</button>
+
+    <canvas width="1920" height="1080" class="background" id="background"></canvas>
+    <span id="Character">
+        <button class="CharacterButton" type="button" id="Character1">
+            <h1>Wasabi</h1>
+            <div class="cha-image">
+                <img src="img\Rufus_final_no_backround.png" class="image" height="300px">
+            </div>
+            <h2 class="CharStats">
+                Class: Fighter <br>
+                HP: 5 <br>
+                Str: 13 <br>
+                Dex: 10 <br>
+                Wis: 8 </h2>
+            <h3 class="backstory">
+                As a determined young warrior seeking a place to hone his skills, Wasabi heard from a wise wanderer
+                about a mysterious temple in the desert renowned as a site of great trials.
+            </h3>
+        </button>
+        <button class="CharacterButton" type="button" id="Character2">
+            <h1>Kiri</h1>
+            <div class="cha-image">
+                <img src="img\Mika_final_no_backround.png" class="image" height="300px">
+            </div>
+            <h2 class="CharStats">
+                Class: Rogue <br>
+                HP: 4 <br>
+                Str: 10<br>
+                Dex: 13<br>
+                Wis: 8</h2>
+            <h3 class="backstory">
+                As a notorious robber seeking wealth, Kiri fencded stolen treasures on the black market. There, you hear
+                of a legend about a temple in the desert said to hold great treasures.
+            </h3>
+        </button>
+        <button class="CharacterButton" type="button" id="Character3">
+            <h1>Hazel</h1>
+            <div class="cha-image">
+                <img src="img\maxi_final_no_backround.png" class="image" height="300px">
+            </div>
+                <h2 class="CharStats">
+                    Class: Sage <br>
+                    HP: 3 <br>
+                    Str: 8<br>
+                    Dex: 10<br>
+                    Wis: 13</h2>
+                <h3 class="backstory">
+                    On his lifelong journey for knowledge and understanding, the wise wanderer uncovered the location of
+                    a mysterious temple hidden in the desert. It's said to bestow upon Hazel unparalleled wisdom.
+                </h3>
+        </button>
+    </span>
+</body>
+
+</html>
